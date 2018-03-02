@@ -10,79 +10,87 @@
             warmth,
             image,
             hasMouse: false,
-            //TODO Update,
-            /*(check which squares player is in, lose one heat)
+            Update: function ()
+            {
+                //TODO (check which squares player is in, lose one heat)
 
-        If sunlight, heat = 10
-    	
-        If (warmth = 0) Game over
+                //TODO If sunlight, heat = 10
 
-        If hawk, display game over screen
+                //TODO If(warmth = 0) Game over
 
-        If points, score += 5
+                //TODO If hawk, display game over screen
 
-        If mouse, mouse = true
+                //TODO If points, score += 5
 
-        If home and mouse = true, display win screen*/
+                //TODO If mouse, mouse = true
 
-        }
+                //TODO If home and mouse = true, display win screen
+            }
+            
+
+        };
     var tile =
         {
             image,
             size,
-        }
+        };
     var hawk =
         {
             positionX,
             positionY,
             image,
-        }
+        };
     var map =
         {
-            /*
-            Tile for home, mouse, empty, sun, points, mouse
-            Matrix of tile objects
-            Hawk array of 2
-            Score variable
-            TODO Update Method
-                move hawks using RnG
-                Random number 0 - 3
-                If (number = 0 & hawk.x > 0) Go left
-                Etc…
-                If(player.location = hawk.location) Game over
-		        Decrease score by 1
-            */
-        }
+            //TODO Tile for home, mouse, empty, sun, points, mouse
+            //TODO Matrix of tile objects
+            //TODO Hawk array of 2
+            score,
+            Update: function ()
+            {
+                //TODO move hawks using RnG
+                //TODO Random number 0 - 3
+                //TODO If (number = 0 & hawk.x > 0) Go left
+                //TODO Etc…
+                //TODO If(player.location = hawk.location) Game over
+		        //TODO Decrease score by 1
+            }
+        };
     window.addEventListener("keydown", keydownHandler, false);
     window.addEventListener("keyup", keyupHandler, false);
 
     function keydownHandler(event)
     {
-        /*TODO Keydown(Arrow directions)
-        If(arrow directions) move in that direction
-        PlayerUpdate
-        MapUpdate
-        Render
-        */
-    }
+        //TODO If(arrow directions) move in that direction
+        player.Update();
+        map.Update();
+        Render();
+    };
     function keyupHandler(event)
     {
         //TODO fun stuff
-    }
+    };
     
     //TODO Game Over pop- up
     //TODO Refresh button
+    
+    function Render()
+    {
+        //TODO DrawMap
+        //TODO DrawPlayer
+        //TODO DrawSidebar
+    }
+    
 
-    //TODO Render
-    //TODO DrawMap
-    //TODO DrawPlayer
-    //TODO DrawSidebar
-/*
-    TODO Sidebar
-    TODO Title of game
-    TODO displays map.Score
-    TODO displays Player.Sunlight
-    TODO displays player.hasMouse
-    TODO Instructions
-*/
+    //TODO Sidebar
+    function Sidebar()
+    {
+        //TODO Title of game
+        //TODO displays map.Score
+        //TODO displays Player.Sunlight
+        //TODO displays player.hasMouse
+        //TODO Instructions
+    }
+    
+
 </script>
