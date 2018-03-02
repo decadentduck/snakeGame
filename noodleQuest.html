@@ -1,11 +1,88 @@
 ﻿<!DOCTYPE html>
+<title>Noodle's Quest</title>
+<canvas width="1300" height="210"></canvas>
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <title>weeeeeeeeee</title>
-</head>
-<body>
+<script>
+    var player =
+        {
+            positionX,
+            positionY,
+            warmth,
+            image,
+            hasMouse: false,
+            //TODO Update,
+            /*(check which squares player is in, lose one heat)
 
-</body>
-</html>
+        If sunlight, heat = 10
+    	
+        If (warmth = 0) Game over
+
+        If hawk, display game over screen
+
+        If points, score += 5
+
+        If mouse, mouse = true
+
+        If home and mouse = true, display win screen*/
+
+        }
+    var tile =
+        {
+            image,
+            size,
+        }
+    var hawk =
+        {
+            positionX,
+            positionY,
+            image,
+        }
+    var map =
+        {
+            /*
+            Tile for home, mouse, empty, sun, points, mouse
+            Matrix of tile objects
+            Hawk array of 2
+            Score variable
+            TODO Update Method
+                move hawks using RnG
+                Random number 0 - 3
+                If (number = 0 & hawk.x > 0) Go left
+                Etc…
+                If(player.location = hawk.location) Game over
+		        Decrease score by 1
+            */
+        }
+    window.addEventListener("keydown", keydownHandler, false);
+    window.addEventListener("keyup", keyupHandler, false);
+
+    function keydownHandler(event)
+    {
+        /*TODO Keydown(Arrow directions)
+        If(arrow directions) move in that direction
+        PlayerUpdate
+        MapUpdate
+        Render
+        */
+    }
+    function keyupHandler(event)
+    {
+        //TODO fun stuff
+    }
+    
+    //TODO Game Over pop- up
+    //TODO Refresh button
+
+    //TODO Render
+    //TODO DrawMap
+    //TODO DrawPlayer
+    //TODO DrawSidebar
+/*
+    TODO Sidebar
+    TODO Title of game
+    TODO displays map.Score
+    TODO displays Player.Sunlight
+    TODO displays player.hasMouse
+    TODO Instructions
+*/
+</script>
