@@ -5,10 +5,12 @@
 <script>
     var player =
         {
-            positionX,
-            positionY,
-            warmth,
-            image,
+            //TODO decide values
+            positionX: 0,
+            positionY: 0,
+            warmth: 10,
+            //TODO fix place holder below
+            image: "snake.png",
             hasMouse: false,
             Update: function ()
             {
@@ -33,17 +35,23 @@
         this.image = _image;
         this.size = _size;
     };
-    function Hawk(_image, _x, _y) {
-        this.image = _image;
+    function Hawk(_x, _y) {
+        this.image = "Images/Hawk.jpg";
         this.positionX = _x;
         this.positionY = _y;
     };
     
     var map =
         {
+            size: 150,
             //TODO figure out if this works
-            home: Tile("", 150),
-            //TODO Tile for home, mouse, empty, sun, points, mouse
+            home: Tile("Images/Rock.jpg", size),
+            mouse: Tile("Images/Mouse.jpg", size),
+            empty: Tile("Images/Grass", size),
+            sun: Tile("Images/Sunlight.jpg", size),
+            pointsTile: Tile("Images/PointSquare.jpg", size),
+
+            //TODO Tile for home, mouse, empty, sun, points
             //TODO Matrix of tile objects
             //TODO Hawk array of 2
             score,
