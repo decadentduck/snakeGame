@@ -29,12 +29,13 @@
                 //TODO If home and mouse = true, display win screen
             }
             
-
         };
+
     function Tile(_image, _size) {
         this.image = _image;
         this.size = _size;
     };
+
     function Hawk(_x, _y) {
         this.image = "Images/Hawk.jpg";
         this.positionX = _x;
@@ -45,15 +46,38 @@
         {
             size: 150,
             //TODO figure out if this works
-            home: Tile("Images/Rock.jpg", size),
+            home: Tile("Images/Home.jpg", size),
             mouse: Tile("Images/Mouse.jpg", size),
             empty: Tile("Images/Grass", size),
             sun: Tile("Images/Sunlight.jpg", size),
             pointsTile: Tile("Images/PointSquare.jpg", size),
-
-            //TODO Tile for home, mouse, empty, sun, points
+            rockWall: Tile("Images/Rock.jpg", size),
             //TODO Matrix of tile objects
-            //TODO Hawk array of 2
+            createMatrix: function ()
+            {
+                //determine maximum size
+                var iMax = 15;
+                var jMax = 5;
+                //instantiate the array
+                var mapMatrix = new Array(),
+                //set every value to zero
+                for (i = 0; i < iMax; i++)
+                {
+                    mapMatrix[i] = new Array();
+                    for (j = 0; j < jMax; j++)
+                    {
+                        mapMatrix[i][j] = empty;
+                    }
+                }
+                //TODO manually input everything that is a thing
+                //mapMatrix[x][y] = tileName;
+
+            },
+            
+            //Hawk array of 2
+            hawk1: Hawk(3, 3),
+            hawk2: Hawk(3, 3),
+            hawks: [hawk1, hawk2],
             score,
             Update: function ()
             {
@@ -77,11 +101,11 @@
         map.Update();
         Render();
     };
+
     function keyupHandler(event)
     {
         //TODO fun stuff
     };
-    
     
     function GameOver()
     {
@@ -109,8 +133,6 @@
         //TODO DrawSidebar
     }
     
-
-    //TODO Sidebar
     function Sidebar()
     {
         //TODO Title of game
@@ -120,5 +142,4 @@
         //TODO Instructions
     }
     
-
 </script>
