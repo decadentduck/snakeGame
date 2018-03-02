@@ -29,19 +29,20 @@
             
 
         };
-    var tile =
-        {
-            image,
-            size,
-        };
-    var hawk =
-        {
-            positionX,
-            positionY,
-            image,
-        };
+    function Tile(_image, _size) {
+        this.image = _image;
+        this.size = _size;
+    };
+    function Hawk(_image, _x, _y) {
+        this.image = _image;
+        this.positionX = _x;
+        this.positionY = _y;
+    };
+    
     var map =
         {
+            //TODO figure out if this works
+            home: Tile("", 150),
             //TODO Tile for home, mouse, empty, sun, points, mouse
             //TODO Matrix of tile objects
             //TODO Hawk array of 2
@@ -49,13 +50,15 @@
             Update: function ()
             {
                 //TODO move hawks using RnG
-                //TODO Random number 0 - 3
+                //Random number 0 - 3
+                Math.floor(Math.random() * 4);  
                 //TODO If (number = 0 & hawk.x > 0) Go left
                 //TODO Etc…
                 //TODO If(player.location = hawk.location) Game over
 		        //TODO Decrease score by 1
             }
         };
+    
     window.addEventListener("keydown", keydownHandler, false);
     window.addEventListener("keyup", keyupHandler, false);
 
@@ -71,11 +74,28 @@
         //TODO fun stuff
     };
     
-    //TODO Game Over pop- up
-    //TODO Refresh button
     
+    function GameOver()
+    {
+        //TODO Game Over pop- up
+        //TODO Refresh button
+    }
+
+    //create canvas and drawing stuff I guess
+    var canvas = document.querySelector("canvas");
+    var drawingSurface = canvas.getContext("2d");
+
+    //TODO image stuff not sure if needed
+    /*
+    var image = new Image();
+    image.addEventListener("load", render, false);
+    image.src = snake.IMAGE;
+    */
+    //event listeners
     function Render()
     {
+        //clear the screen
+        drawingSurface.clearRect(0, 0, canvas.width, canvas.height);
         //TODO DrawMap
         //TODO DrawPlayer
         //TODO DrawSidebar
