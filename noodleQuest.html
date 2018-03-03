@@ -16,7 +16,7 @@
             {
                 //TODO (check which squares player is in, lose one heat)
 
-                //TODO If sunlight, heat = 10
+                //TODO If sunlight, warmth = 10
 
                 //TODO If(warmth = 0) Game over
 
@@ -24,9 +24,9 @@
 
                 //TODO If points, score += 5
 
-                //TODO If mouse, mouse = true
+                //TODO If mouse, hasMouse = true
 
-                //TODO If home and mouse = true, display win screen
+                //TODO If home and hasMouse = true, display win screen
             }
             
         };
@@ -72,6 +72,37 @@
                 //TODO manually input everything that is a thing
                 //mapMatrix[x][y] = tileName;
 
+                mapMatrix[1][1] = home;
+                mapMatrix[2][1] = rockWall;
+                mapMatrix[3][1] = sun;
+                mapMatrix[10][1] = rockWall;
+                mapMatrix[11][1] = rockWall;
+                mapMatrix[12][1] = sun;
+
+                mapMatrix[2][2] = rockWall;
+                mapMatrix[9][2] = sun;
+                mapMatrix[10][2] = rockWall;
+                mapMatrix[11][2] = rockWall;
+                mapMatrix[15][2] = sun;
+
+                mapMatrix[5][3] = sun;
+                mapMatrix[8][3] = rockWall;
+
+                mapMatrix[3][4] = rockWall;
+                mapMatrix[5][4] = rockWall;
+                mapMatrix[6][4] = rockWall;
+                mapMatrix[12][4] = rockWall;
+                mapMatrix[14][4] = rockWall;
+
+                mapMatrix[1][5] = sun;
+                mapMatrix[5][5] = rockWall;
+                mapMatrix[6][5] = rockWall;
+                mapMatrix[7][5] = sun;
+                mapMatrix[12][5] = sun;
+                mapMatrix[14][5] = rockWall;
+                mapMatrix[15][5] = mouse;
+
+                //for convenience the two hawks are at [2][6] and [10][4]
             },
             
             //Hawk array of 2
