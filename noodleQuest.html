@@ -160,6 +160,20 @@
         //clear the screen
         drawingSurface.clearRect(0, 0, canvas.width, canvas.height);
         //TODO DrawMap
+        //for each x position
+        for (i = 0; i < iMax; i++)
+        {
+            //for each y position
+            for (j = 0; j < jMax; j++)
+            {
+               //draw the square
+                //mapMatrix[1][1] = home;
+                //drawingSurface.drawImage(image, sourceX, 0, snake.w, snake.h, 0, 0, snake.w, snake.h
+                drawingSurface.drawImage(mapMatrix[i][j].image, i * mapMatrix[i][j].size,
+                    j * mapMatrix[i][j].size, mapMatrix[i][j].size, mapMatrix[i][j].size, 0, 0,
+                    mapMatrix[i][j].size, mapMatrix[i][j].size);
+            }
+        }
         //TODO DrawPlayer
         //TODO DrawSidebar
     }
