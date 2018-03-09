@@ -14,13 +14,41 @@
                     positionY: 0,
                     size:50,
                     warmth: 10,
+
+                    //directions
+                    idle: 0,
+                    left: 1,
+                    up: 2,
+                    down: 3,
+                    right: 4,
+
                     //TODO fix place holder below
                     image: "Images/Snake.png",
                     hasMouse: false,
                     Update: function ()
                     {
 
-                        player.positionX += 100; //TODO delete this
+                        //player.positionX += 100; //TODO delete this
+
+                        //move player based on direction 
+                        switch (player.direction)
+                        {
+                            case player.left:
+                                player.positionX -= 100; 
+                                break;
+                            case player.up:
+                                player.positionY -= 100; 
+                                break;
+                            case player.down:
+                                player.positionY += 100; 
+                                break;
+                            case player.right:
+                                player.positionX += 100; 
+                                break;
+                            default:
+                                break;
+                        };
+
                         //TODO (check which squares player is in, lose one heat)
 
                         //TODO If sunlight, warmth = 10
@@ -43,6 +71,7 @@
             var drawImage = new Image();
             drawImage.src = player.image;
             drawImage.addEventListener("load", render, false);
+            //drawImage.addEventListener("load", map.createMatrix, false);
             window.addEventListener("keyup", keyupHandler, false);
             window.addEventListener("keydown", keydownHandler, false);
 
@@ -75,19 +104,20 @@
             }
             function keyupHandler(event)
             {
-                //    //TODO fun stuff?
+                //TODO fun stuff?
                 player.Update();
                 //    map.Update();
                 
                 render();
+                //player.direction = player.idle;
             };
             function keydownHandler(event)
             {
                 //TODO If(arrow directions) move in that direction
-                if (event.keyCode == 65) { /*move left*/ }
-                if (event.keyCode == 87) { /*move up*/ }
-                if (event.keyCode == 83) { /*move down*/ }
-                if (event.keyCode == 68) { /*move right*/ }
+                if (event.keyCode == 65) { /*move left*/ player.direction = player.left; }
+                if (event.keyCode == 87) { /*move up*/ player.direction = player.up; }
+                if (event.keyCode == 83) { /*move down*/ player.direction = player.down; }
+                if (event.keyCode == 68) { /*move right*/ player.direction = player.right; }
 
             };
             
@@ -117,7 +147,8 @@
 
                     //Matrix of tile objects
 
-                    createMatrix: function () {
+                    createMatrix: function ()
+                    {
                         //determine maximum size
                         var iMax = 15;
                         var jMax = 5;
@@ -187,7 +218,8 @@
                     hawks: [hawk1, hawk2],
                     score,
 
-                    Update: function () {
+                    Update: function ()
+                    {
                         //TODO move hawks using RnG
                         //Random number 0 - 3
                         Math.floor(Math.random() * 4);
