@@ -34,6 +34,7 @@
 
                         //TODO If home and hasMouse = true, display win screen
                     }
+
                 };
             var canvas = $("#myCanvas");
             var context = canvas.get(0).getContext("2d");
@@ -42,7 +43,6 @@
             drawImage.src = player.image;
             drawImage.addEventListener("load", render, false);
             window.addEventListener("keyup", keyupHandler, false);
-            window.addEventListener("keydown", keydownHandler, false);
             
             function render()
             {
@@ -94,7 +94,7 @@
                 this.positionY = _y;
             };
 
-             //var map =
+            //var map =
                 //    {
                 //        size: 150,
                 //        //TODO figure out if this works
@@ -175,6 +175,40 @@
                 //    };
         });
         
+  
+    //            mapMatrix[0][0] = home;
+    //            mapMatrix[1][0] = rockWall;
+    //            mapMatrix[2][0] = sun;
+    //            mapMatrix[9][0] = rockWall;
+    //            mapMatrix[10][0] = rockWall;
+    //            mapMatrix[11][0] = sun;
+
+    //            mapMatrix[1][1] = rockWall;
+    //            mapMatrix[7][1] = sun;
+    //            mapMatrix[9][1] = rockWall;
+    //            mapMatrix[10][1] = rockWall;
+    //            mapMatrix[14][1] = sun;
+
+    //            mapMatrix[4][2] = sun;
+    //            mapMatrix[7][2] = rockWall;
+
+    //            mapMatrix[2][5] = rockWall;
+    //            mapMatrix[4][5] = rockWall;
+    //            mapMatrix[5][5] = rockWall;
+    //            mapMatrix[11][5] = rockWall;
+    //            mapMatrix[13][5] = rockWall;
+
+    //            mapMatrix[0][4] = sun;
+    //            mapMatrix[4][4] = rockWall;
+    //            mapMatrix[5][4] = rockWall;
+    //            mapMatrix[6][4] = sun;
+    //            mapMatrix[11][4] = sun;
+    //            mapMatrix[13][4] = rockWall;
+    //            mapMatrix[14][4] = mouse;
+        
+            
+        //window.addEventListener("keydown", keydownHandler, false);
+        //window.addEventListener("keyup", keyupHandler, false);
 
                 //function keydownHandler(event)
                 //{
