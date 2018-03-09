@@ -43,7 +43,8 @@
             drawImage.src = player.image;
             drawImage.addEventListener("load", render, false);
             window.addEventListener("keyup", keyupHandler, false);
-            
+            window.addEventListener("keydown", keydownHandler, false);
+
             function render()
             {
                 //clear the screen
@@ -78,7 +79,15 @@
                 
                 render();
             };
+            function keydownHandler(event)
+            {
+                //TODO If(arrow directions) move in that direction
+                if (event.keyCode == 65) { /*move left*/ }
+                if (event.keyCode == 87) { /*move up*/ }
+                if (event.keyCode == 83) { /*move down*/ }
+                if (event.keyCode == 68) { /*move right*/ }
 
+            };
 
 
             function Tile(_image, _size)
@@ -94,87 +103,105 @@
                 this.positionY = _y;
             };
 
-            //var map =
-                //    {
-                //        size: 150,
-                //        //TODO figure out if this works
-                //        home: Tile("Images/Home.jpg", size),
-                //        mouse: Tile("Images/Mouse.jpg", size),
-                //        empty: Tile("Images/Grass", size),
-                //        sun: Tile("Images/Sunlight.jpg", size),
-                //        pointsTile: Tile("Images/PointSquare.jpg", size),
-                //        rockWall: Tile("Images/Rock.jpg", size),
-                //        //Matrix of tile objects
-                //        createMatrix: function ()
-                //        {
-                //            //determine maximum size
-                //            var iMax = 15;
-                //            var jMax = 5;
-                //            //instantiate the array
-                //            var mapMatrix = new Array(),
-                //            //set every value to zero
-                //            for (i = 0; i < iMax; i++)
-                //            {
-                //                mapMatrix[i] = new Array();
-                //                for (j = 0; j < jMax; j++)
-                //                {
-                //                    mapMatrix[i][j] = empty;
-                //                }
-                //            }
-                //            //manually input everything that is a thing
-                //            //mapMatrix[x][y] = tileName;
+            var map =
+                    {
+                        size: 150,
+                        //TODO figure out if this works
+                        home: Tile("Images/Home.jpg", size),
+                        mouse: Tile("Images/Mouse.jpg", size),
+                        empty: Tile("Images/Grass", size),
+                        sun: Tile("Images/Sunlight.jpg", size),
+                        pointsTile: Tile("Images/PointSquare.jpg", size),
+                        rockWall: Tile("Images/Rock.jpg", size),
 
-                //            mapMatrix[1][1] = home;
-                //            mapMatrix[2][1] = rockWall;
-                //            mapMatrix[3][1] = sun;
-                //            mapMatrix[10][1] = rockWall;
-                //            mapMatrix[11][1] = rockWall;
-                //            mapMatrix[12][1] = sun;
+                        //Matrix of tile objects
+                        //TODO figure out why this doesnt work
+                        createMatrix: function ()
+                        {
+                            ////determine maximum size
+                            //var iMax = 15;
+                            //var jMax = 5;
+                            ////instantiate the array
+                            //var mapMatrix = new Array(),
+                            ////set every value to zero
+                            //for (i = 0; i < iMax; i++)
+                            //{
+                            //    mapMatrix[i] = new Array();
+                            //    for (j = 0; j < jMax; j++)
+                            //    {
+                            //        mapMatrix[i][j] = empty;
+                            //    }
+                            //}
+                            //manually input everything that is a thing
+                            //mapMatrix[x][y] = tileName;
 
-                //            mapMatrix[2][2] = rockWall;
-                //            mapMatrix[9][2] = sun;
-                //            mapMatrix[10][2] = rockWall;
-                //            mapMatrix[11][2] = rockWall;
-                //            mapMatrix[15][2] = sun;
+                            //mapMatrix[1][1] = home;
+                            //mapMatrix[2][1] = rockWall;
+                            //mapMatrix[3][1] = sun;
+                            //mapMatrix[10][1] = rockWall;
+                            //mapMatrix[11][1] = rockWall;
+                            //mapMatrix[12][1] = sun;
 
-                //            mapMatrix[5][3] = sun;
-                //            mapMatrix[8][3] = rockWall;
+                            //mapMatrix[2][2] = rockWall;
+                            //mapMatrix[9][2] = sun;
+                            //mapMatrix[10][2] = rockWall;
+                            //mapMatrix[11][2] = rockWall;
+                            //mapMatrix[15][2] = sun;
 
-                //            mapMatrix[3][4] = rockWall;
-                //            mapMatrix[5][4] = rockWall;
-                //            mapMatrix[6][4] = rockWall;
-                //            mapMatrix[12][4] = rockWall;
-                //            mapMatrix[14][4] = rockWall;
+                            //mapMatrix[5][3] = sun;
+                            //mapMatrix[8][3] = rockWall;
 
-                //            mapMatrix[1][5] = sun;
-                //            mapMatrix[5][5] = rockWall;
-                //            mapMatrix[6][5] = rockWall;
-                //            mapMatrix[7][5] = sun;
-                //            mapMatrix[12][5] = sun;
-                //            mapMatrix[14][5] = rockWall;
-                //            mapMatrix[15][5] = mouse;
+                            //mapMatrix[3][4] = rockWall;
+                            //mapMatrix[5][4] = rockWall;
+                            //mapMatrix[6][4] = rockWall;
+                            //mapMatrix[12][4] = rockWall;
+                            //mapMatrix[14][4] = rockWall;
 
-                //            //for convenience the two hawks are at [2][6] and [10][4]
-                //        },
+                            //mapMatrix[1][5] = sun;
+                            //mapMatrix[5][5] = rockWall;
+                            //mapMatrix[6][5] = rockWall;
+                            //mapMatrix[7][5] = sun;
+                            //mapMatrix[12][5] = sun;
+                            //mapMatrix[14][5] = rockWall;
+                            //mapMatrix[15][5] = mouse;
 
-                //        //Hawk array of 2
-                //        hawk1: Hawk(3, 3),
-                //        hawk2: Hawk(3, 3),
-                //        hawks: [hawk1, hawk2],
-                //        score,
-                //        Update: function ()
-                //        {
-                //            //TODO move hawks using RnG
-                //            //Random number 0 - 3
-                //            Math.floor(Math.random() * 4);
-                //            //TODO If (number = 0 & hawk.x > 0) Go left
-                //            //TODO Etc…
-                //            //TODO If(player.location = hawk.location) Game over
-                      //      //TODO Decrease score by 1
-                //        }
-                //    };
+                            //for convenience the two hawks are at [2][6] and [10][4]
+                        },
+
+                        //Hawk array of 2
+                        hawk1: Hawk(3, 3),
+                        hawk2: Hawk(3, 3),
+                        hawks: [hawk1, hawk2],
+                        score,
+
+                        Update: function ()
+                        {
+                            //TODO move hawks using RnG
+                            //Random number 0 - 3
+                            Math.floor(Math.random() * 4);
+                            //TODO If (number = 0 & hawk.x > 0) Go left
+                            //TODO Etc…
+                            //TODO If(player.location = hawk.location) Game over
+                            //TODO Decrease score by 1
+                        }
+                };
+
+            //function GameOver()
+                //{
+                //    //TODO Game Over pop- up
+                //    //TODO Refresh button
+                //};
+            //function Sidebar()
+                //{
+                //    //TODO Title of game
+                //    //TODO displays map.Score
+                //    //TODO displays Player.Sunlight
+                //    //TODO displays player.hasMouse
+                //    //TODO Instructions
+                //}
         });
-        
+        //////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////
   
     //            mapMatrix[0][0] = home;
     //            mapMatrix[1][0] = rockWall;
@@ -206,36 +233,6 @@
     //            mapMatrix[13][4] = rockWall;
     //            mapMatrix[14][4] = mouse;
         
-            
-        //window.addEventListener("keydown", keydownHandler, false);
-        //window.addEventListener("keyup", keyupHandler, false);
-
-                //function keydownHandler(event)
-                //{
-                //    //TODO If(arrow directions) move in that direction
-                //    if (event.keyCode == 65) { /*move left*/ }
-                //    if (event.keyCode == 87) { /*move up*/ }
-                //    if (event.keyCode == 83) { /*move down*/ }
-                //    if (event.keyCode == 68) { /*move right*/ }
-
-                //};
-
-                //function keyupHandler(event)
-                //{
-                //    //TODO fun stuff?
-                //    player.Update();
-                //    map.Update();
-                //    Render();
-                //};
-
-                //function GameOver()
-                //{
-                //    //TODO Game Over pop- up
-                //    //TODO Refresh button
-                //};
-
-                //event listeners
-
                 //function Render()
                 //{
                 //    //clear the screen
@@ -263,14 +260,7 @@
                     //TODO DrawSidebar
                 //}
 
-                //function Sidebar()
-                //{
-                //    //TODO Title of game
-                //    //TODO displays map.Score
-                //    //TODO displays Player.Sunlight
-                //    //TODO displays player.hasMouse
-                //    //TODO Instructions
-                //}
+                
         </script>
   </head >
             <body>
