@@ -12,6 +12,7 @@
                     //TODO decide values
                     positionX: 0,
                     positionY: 0,
+                    size:50,
                     warmth: 10,
                     //TODO fix place holder below
                     image: "Images/Snake.png",
@@ -66,8 +67,9 @@
                 //                (j * mapMatrix[i][j].size), mapMatrix[i][j].size, mapMatrix[i][j].size);
                 //        }
                 //    }
+
                 //DrawPlayer
-                context.drawImage(drawImage, player.positionX, player.positionY, 100, 100);
+                context.drawImage(drawImage, player.positionX, player.positionY, player.size, player.size);
 
                     //TODO DrawSidebar
             }
@@ -88,8 +90,7 @@
                 if (event.keyCode == 68) { /*move right*/ }
 
             };
-
-
+            
             function Tile(_image, _size)
             {
                 this.image = _image;
@@ -104,105 +105,106 @@
             };
 
             var map =
-                    {
-                        size: 150,
-                        //TODO figure out if this works
-                        home: Tile("Images/Home.jpg", size),
-                        mouse: Tile("Images/Mouse.jpg", size),
-                        empty: Tile("Images/Grass", size),
-                        sun: Tile("Images/Sunlight.jpg", size),
-                        pointsTile: Tile("Images/PointSquare.jpg", size),
-                        rockWall: Tile("Images/Rock.jpg", size),
+                {
+                    size: 150,
+                    //TODO figure out if this works
+                    home: Tile("Images/Home.jpg", size),
+                    mouse: Tile("Images/Mouse.jpg", size),
+                    empty: Tile("Images/Grass", size),
+                    sun: Tile("Images/Sunlight.jpg", size),
+                    pointsTile: Tile("Images/PointSquare.jpg", size),
+                    rockWall: Tile("Images/Rock.jpg", size),
 
-                        //Matrix of tile objects
-                        //TODO figure out why this doesnt work
-                        createMatrix: function ()
-                        {
-                            ////determine maximum size
-                            //var iMax = 15;
-                            //var jMax = 5;
-                            ////instantiate the array
-                            //var mapMatrix = new Array(),
-                            ////set every value to zero
-                            //for (i = 0; i < iMax; i++)
-                            //{
-                            //    mapMatrix[i] = new Array();
-                            //    for (j = 0; j < jMax; j++)
-                            //    {
-                            //        mapMatrix[i][j] = empty;
-                            //    }
-                            //}
-                            //manually input everything that is a thing
-                            //mapMatrix[x][y] = tileName;
+                    //Matrix of tile objects
 
-                            //mapMatrix[1][1] = home;
-                            //mapMatrix[2][1] = rockWall;
-                            //mapMatrix[3][1] = sun;
-                            //mapMatrix[10][1] = rockWall;
-                            //mapMatrix[11][1] = rockWall;
-                            //mapMatrix[12][1] = sun;
+                    createMatrix: function () {
+                        //determine maximum size
+                        var iMax = 15;
+                        var jMax = 5;
+                        //instantiate the array
+                        //var mapMatrix = new Array(), //TODO figure out why this doesnt work <-- this specific line ruins everything
 
-                            //mapMatrix[2][2] = rockWall;
-                            //mapMatrix[9][2] = sun;
-                            //mapMatrix[10][2] = rockWall;
-                            //mapMatrix[11][2] = rockWall;
-                            //mapMatrix[15][2] = sun;
+                        //set every value to zero
+                        //for (i = 0; i < iMax; i++)
+                        //{
+                        //    mapMatrix[i] = new Array();
+                        //    for (j = 0; j < jMax; j++)
+                        //    {
+                        //        mapMatrix[i][j] = empty;
+                        //    }
+                        //}
 
-                            //mapMatrix[5][3] = sun;
-                            //mapMatrix[8][3] = rockWall;
+                        //manually input everything that is a thing
+                        //mapMatrix[x][y] = tileName;
 
-                            //mapMatrix[3][4] = rockWall;
-                            //mapMatrix[5][4] = rockWall;
-                            //mapMatrix[6][4] = rockWall;
-                            //mapMatrix[12][4] = rockWall;
-                            //mapMatrix[14][4] = rockWall;
+                        //            mapMatrix[0][0] = home;
+                        //            mapMatrix[1][0] = rockWall;
+                        //            mapMatrix[2][0] = sun;
+                        //            mapMatrix[9][0] = rockWall;
+                        //            mapMatrix[10][0] = rockWall;
+                        //            mapMatrix[11][0] = sun;
 
-                            //mapMatrix[1][5] = sun;
-                            //mapMatrix[5][5] = rockWall;
-                            //mapMatrix[6][5] = rockWall;
-                            //mapMatrix[7][5] = sun;
-                            //mapMatrix[12][5] = sun;
-                            //mapMatrix[14][5] = rockWall;
-                            //mapMatrix[15][5] = mouse;
+                        //            mapMatrix[1][1] = rockWall;
+                        //            mapMatrix[7][1] = sun;
+                        //            mapMatrix[9][1] = rockWall;
+                        //            mapMatrix[10][1] = rockWall;
+                        //            mapMatrix[14][1] = sun;
 
-                            //for convenience the two hawks are at [2][6] and [10][4]
-                        },
+                        //            mapMatrix[4][2] = sun;
+                        //            mapMatrix[7][2] = rockWall;
 
-                        //Hawk array of 2
-                        hawk1: Hawk(3, 3),
-                        hawk2: Hawk(3, 3),
-                        hawks: [hawk1, hawk2],
-                        score,
+                        //            mapMatrix[2][5] = rockWall;
+                        //            mapMatrix[4][5] = rockWall;
+                        //            mapMatrix[5][5] = rockWall;
+                        //            mapMatrix[11][5] = rockWall;
+                        //            mapMatrix[13][5] = rockWall;
 
-                        Update: function ()
-                        {
-                            //TODO move hawks using RnG
-                            //Random number 0 - 3
-                            Math.floor(Math.random() * 4);
-                            //TODO If (number = 0 & hawk.x > 0) Go left
-                            //TODO Etc…
-                            //TODO If(player.location = hawk.location) Game over
-                            //TODO Decrease score by 1
-                        }
+                        //            mapMatrix[0][4] = sun;
+                        //            mapMatrix[4][4] = rockWall;
+                        //            mapMatrix[5][4] = rockWall;
+                        //            mapMatrix[6][4] = sun;
+                        //            mapMatrix[11][4] = sun;
+                        //            mapMatrix[13][4] = rockWall;
+                        //            mapMatrix[14][4] = mouse;
+
+                        //for convenience the two hawks are at [2][6] and [10][4]
+                    },
+
+                    //Hawk array of 2
+                    hawk1: Hawk(3, 3),
+                    hawk2: Hawk(3, 3),
+                    hawks: [hawk1, hawk2],
+                    score,
+
+                    Update: function () {
+                        //TODO move hawks using RnG
+                        //Random number 0 - 3
+                        Math.floor(Math.random() * 4);
+                        //TODO If (number = 0 & hawk.x > 0) Go left
+                        //TODO Etc…
+                        //TODO If(player.location = hawk.location) Game over
+                        //TODO Decrease score by 1
+                    }
                 };
 
-            //function GameOver()
-                //{
-                //    //TODO Game Over pop- up
-                //    //TODO Refresh button
-                //};
-            //function Sidebar()
-                //{
-                //    //TODO Title of game
-                //    //TODO displays map.Score
-                //    //TODO displays Player.Sunlight
-                //    //TODO displays player.hasMouse
-                //    //TODO Instructions
-                //}
+            function GameOver()
+            {
+                //TODO Game Over pop- up
+                //TODO Refresh button
+            };
+            function Sidebar()
+            {
+                //TODO Title of game
+                //TODO displays map.Score
+                //TODO displays Player.Sunlight
+                //TODO displays player.hasMouse
+                //TODO Instructions
+            };
         });
+
+        //////////////////////////////////////////////////////////////////Back ups
         //////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////
-  
+  //                Actual Locations
     //            mapMatrix[0][0] = home;
     //            mapMatrix[1][0] = rockWall;
     //            mapMatrix[2][0] = sun;
