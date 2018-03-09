@@ -7,8 +7,23 @@
     <script type="text/javascript">
         $(document).ready(function ()
         {
+<<<<<<< HEAD
             var canvas = $("#myCanvas");
             var context = canvas.get(0).getContext("2d");
+=======
+            //TODO decide values
+            positionX: 0,
+            positionY: 0,
+            warmth: 10,
+            //TODO fix place holder below
+            image: "Snake.png",
+            hasMouse: false,
+            Update: function ()
+            {
+                //TODO (check which squares player is in, lose one warmth)
+
+                //TODO If sunlight, warmth = 10
+>>>>>>> 7a7f9a730479532886e98cba81bc1f3f9e110308
 
             var drawImagem = new Image();
             drawImagem.src = "snake.png";
@@ -40,6 +55,7 @@
         //_image.addEventListener("load", Render, false);
         //_image.src = "Snake.png";
             
+<<<<<<< HEAD
             //var player =
             //    {
             //        //TODO decide values
@@ -68,6 +84,93 @@
 
             //    };
 
+=======
+        };
+
+    //create canvas and drawing stuff I guess
+    var canvas = document.querySelector("canvas");
+    var drawingSurface = canvas.getContext("2d");
+
+    var image = new Image();
+    image.addEventListener("load", Render, false);
+    image.src = "Snake.png";
+    
+    //function Tile(_image, _size)
+    //{
+    //    this.image = _image;
+    //    this.size = _size;
+    //};
+
+    //function Hawk(_x, _y)
+    //{
+    //    this.image = "Images/Hawk.jpg";
+    //    this.positionX = _x;
+    //    this.positionY = _y;
+    //};
+    
+    //var map =
+    //    {
+    //        size: 150,
+    //        //TODO figure out if this works
+    //        home: Tile("Images/Home.jpg", size),
+    //        mouse: Tile("Images/Mouse.jpg", size),
+    //        empty: Tile("Images/Grass", size),
+    //        sun: Tile("Images/Sunlight.jpg", size),
+    //        pointsTile: Tile("Images/PointSquare.jpg", size),
+    //        rockWall: Tile("Images/Rock.jpg", size),
+    //        //Matrix of tile objects
+    //        createMatrix: function ()
+    //        {
+    //            //determine maximum size
+    //            var iMax = 15;
+    //            var jMax = 5;
+    //            //instantiate the array
+    //            var mapMatrix = new Array(),
+    //            //set every value to zero
+    //            for (i = 0; i < iMax; i++)
+    //            {
+    //                mapMatrix[i] = new Array();
+    //                for (j = 0; j < jMax; j++)
+    //                {
+    //                    mapMatrix[i][j] = empty;
+    //                }
+    //            }
+    //            //manually input everything that is a thing
+    //            //mapMatrix[x][y] = tileName;
+
+    //            mapMatrix[0][0] = home;
+    //            mapMatrix[1][0] = rockWall;
+    //            mapMatrix[2][0] = sun;
+    //            mapMatrix[9][0] = rockWall;
+    //            mapMatrix[10][0] = rockWall;
+    //            mapMatrix[11][0] = sun;
+
+    //            mapMatrix[1][1] = rockWall;
+    //            mapMatrix[7][1] = sun;
+    //            mapMatrix[9][1] = rockWall;
+    //            mapMatrix[10][1] = rockWall;
+    //            mapMatrix[14][1] = sun;
+
+    //            mapMatrix[4][2] = sun;
+    //            mapMatrix[7][2] = rockWall;
+
+    //            mapMatrix[2][5] = rockWall;
+    //            mapMatrix[4][5] = rockWall;
+    //            mapMatrix[5][5] = rockWall;
+    //            mapMatrix[11][5] = rockWall;
+    //            mapMatrix[13][5] = rockWall;
+
+    //            mapMatrix[0][4] = sun;
+    //            mapMatrix[4][4] = rockWall;
+    //            mapMatrix[5][4] = rockWall;
+    //            mapMatrix[6][4] = sun;
+    //            mapMatrix[11][4] = sun;
+    //            mapMatrix[13][4] = rockWall;
+    //            mapMatrix[14][4] = mouse;
+
+    //            //for convenience the two hawks are at [1][5] and [9][3]
+    //        },
+>>>>>>> 7a7f9a730479532886e98cba81bc1f3f9e110308
             
 
                 //function Tile(_image, _size)
