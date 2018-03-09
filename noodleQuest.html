@@ -81,27 +81,46 @@
                 context.clearRect(0, 0, 800, 800);
                 
                 //TODO DrawMap
-                
-                //    //for each x position
-                //    for (i = 0; i < map.iMax; i++)
-                //    {
-                //        //for each y position
-                //        for (j = 0; j < map.jMax; j++)
-                //        {
-                //            //draw the square
-                //            //mapMatrix[i][j]
-                //            //drawingSurface.drawImage(image, X, Y, width, height);
-                //            image = mapMatrix[i][j].image
-                //            drawingSurface.drawImage(image, (i * mapMatrix[i][j].size),
-                //                (j * mapMatrix[i][j].size), mapMatrix[i][j].size, mapMatrix[i][j].size);
-                //        }
-                //    }
+                var image = new Image();
+                var x = 0;
+                var y = 0;
+                var size = 50;
+
+                //for each x position
+                for (var i = 0; i < 15; i++)
+                {
+                        //for each y position
+                    for (var j = 0; j < 5; j++)
+                    {
+                        //draw the square
+                        //mapMatrix[i][j]
+                        //drawingSurface.drawImage(image, X, Y, width, height);
+                        //image = "Images/Grass.png";
+
+                        //context.drawImage(image, x, y, size, size);
+                        //x += 50;
+                        //y += 50;
+
+                        //switch (map.mapMatrix[i][j].name)
+                        //{
+                        //    case "home":
+                        //        break;
+                        //    case "mouse":
+                        //        break;
+                        //    case "grass":
+                        //        break;
+                        //    default:
+                        //        break;
+                        //};
+                    };
+                };
 
                 //DrawPlayer
                 context.drawImage(drawImage, player.positionX, player.positionY, player.size, player.size);
 
                     //TODO DrawSidebar
             }
+
             function keyupHandler(event)
             {
                 //TODO fun stuff?
@@ -121,8 +140,9 @@
 
             };
             
-            function Tile(_image, _size)
+            function Tile(_name, _image, _size)
             {
+                this.name = _name;
                 this.image = _image;
                 this.size = _size;
             };
@@ -138,34 +158,27 @@
                 {
                     size: 150,
                     //TODO figure out if this works
-                    home: Tile("Images/Home.jpg", size),
-                    mouse: Tile("Images/Mouse.jpg", size),
-                    empty: Tile("Images/Grass", size),
-                    sun: Tile("Images/Sunlight.jpg", size),
-                    pointsTile: Tile("Images/PointSquare.jpg", size),
-                    rockWall: Tile("Images/Rock.jpg", size),
+                    home: Tile("home", "Images/Home.jpg", size),
+                    mouse: Tile("mouse", "Images/Mouse.jpg", size),
+                    empty: Tile("grass", "Images/Grass", size),
+                    sun: Tile("sun", "Images/Sunlight.jpg", size),
+                    pointsTile: Tile("points", "Images/PointSquare.jpg", size),
+                    rockWall: Tile("rock", "Images/Rock.jpg", size),
 
                     //Matrix of tile objects
+                    //instantiate the array
 
+                    mapMatrix:
+                    [
+                        [home, rockWall, sun, empty, empty, empty, empty, empty, empty, rockWall, rockWall, sun, empty, empty, empty],
+                        [empty, rockWall, empty, empty, empty, empty, empty, empty, sun, rockWall, rockWall, empty, empty, empty, sun],
+                        [empty, empty, empty, empty, sun, empty, empty, rockWall, empty, empty, empty, empty, empty, empty, empty],
+                        [empty, empty, rockWall, empty, rockWall, rockWall, empty, empty, empty, empty, empty, rockWall, empty, rockWall, empty],
+                        [sun, empty, empty, empty, rockWall, rockWall, sun, empty, empty, empty, empty, sun, empty, rockWall, mouse]
+                    ],
                     createMatrix: function ()
                     {
-                        //determine maximum size
-                        var iMax = 15;
-                        var jMax = 5;
-                        //instantiate the array
-                        //var mapMatrix = new Array(), //TODO figure out why this doesnt work <-- this specific line ruins everything
-
-
-                        var mapMatrix = [
-                            [home, rockWall, sun, empty, empty, empty, empty, empty, empty, rockWall, rockWall, sun, empty, empty, empty ],
-                            [empty, rockWall, empty, empty, empty, empty, empty, empty, sun, rockWall, rockWall, empty, empty, empty, sun],
-                            [empty, empty, empty, empty, sun, empty, empty, rockWall, empty, empty, empty, empty, empty, empty, empty],
-                            [empty, empty, rockWall, empty, rockWall, rockWall, empty, empty, empty, empty, empty, rockWall, empty, rockWall, empty],
-                            [sun, empty, empty, empty, rockWall, rockWall, sun, empty, empty, empty, empty, sun, empty, rockWall, mouse]
-                        ];
-
-
-
+                       
                         //set every value to zero
                         //for (i = 0; i < iMax; i++)
                         //{
