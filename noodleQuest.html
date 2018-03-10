@@ -159,7 +159,14 @@
                 this.positionX = _x;
                 this.positionY = _y;
             };
-
+            var mapMatrix=
+                [
+                    [map.home, map.rockWall, map.sun, map.empty, map.empty, map.empty, map.empty, map.empty, map.empty, map.rockWall, map.rockWall, map.sun, map.empty, map.empty, map.empty],
+                    [map.empty, map.rockWall, map.empty, map.empty, map.empty, map.empty, map.empty, map.empty, map.sun, map.rockWall, map.rockWall, map.empty, map.empty, map.empty, map.sun],
+                    [map.empty, map.empty, map.empty, map.empty, map.sun, map.empty, map.empty, map.rockWall, map.empty, map.empty, map.empty, map.empty, map.empty, map.empty, map.empty],
+                    [map.empty, map.empty, map.rockWall, map.empty, map.rockWall, map.rockWall, map.empty, map.empty, map.empty, map.empty, map.empty, map.rockWall, map.empty, map.rockWall, map.empty],
+                    [map.sun, map.empty, map.empty, map.empty, map.rockWall, map.rockWall, map.sun, map.empty, map.empty, map.empty, map.empty, map.sun, map.empty, map.rockWall, map.mouse],
+                ];
             var map =
                 {
                     size: 50,
@@ -174,14 +181,7 @@
                     //Matrix of tile objects
                     //instantiate the array
 
-                    mapMatrix:
-                    [
-                        [home, rockWall, sun, empty, empty, empty, empty, empty, empty, rockWall, rockWall, sun, empty, empty, empty],
-                        [empty, rockWall, empty, empty, empty, empty, empty, empty, sun, rockWall, rockWall, empty, empty, empty, sun],
-                        [empty, empty, empty, empty, sun, empty, empty, rockWall, empty, empty, empty, empty, empty, empty, empty],
-                        [empty, empty, rockWall, empty, rockWall, rockWall, empty, empty, empty, empty, empty, rockWall, empty, rockWall, empty],
-                        [sun, empty, empty, empty, rockWall, rockWall, sun, empty, empty, empty, empty, sun, empty, rockWall, mouse]
-                    ],
+                    
                     createMatrix: function ()
                     {
                        
