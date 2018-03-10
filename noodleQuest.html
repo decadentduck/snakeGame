@@ -34,16 +34,16 @@
                         switch (player.direction)
                         {
                             case player.left:
-                                player.positionX -= 100; 
+                                player.positionX -= 50; 
                                 break;
                             case player.up:
-                                player.positionY -= 100; 
+                                player.positionY -= 50; 
                                 break;
                             case player.down:
-                                player.positionY += 100; 
+                                player.positionY += 50; 
                                 break;
                             case player.right:
-                                player.positionX += 100; 
+                                player.positionX += 50; 
                                 break;
                             default:
                                 break;
@@ -83,8 +83,8 @@
                 
                 //TODO DrawMap
                 var _image = new Image();
-                var x = 0;
-                var y = 0;
+                var x = 1;
+                var y = 1;
                 var size = 50;
 
                 //for each x position
@@ -115,8 +115,9 @@
                         //};
                         //context.drawImage("Images/Grass.png", 100, 100, 50, 50);
                         _image.src = "Images/Grass.jpg";
-                        context.drawImage(_image, x, y, 50, 50);
-                        x += 50;
+                        x = size * i;
+                        y = size * j;
+                        context.drawImage(_image, x, y, size, size);
                     };
                 };
 
