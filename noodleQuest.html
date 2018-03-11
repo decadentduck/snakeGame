@@ -96,7 +96,7 @@
                         //draw the square
                         //mapMatrix[i][j]
                         //drawingSurface.drawImage(image, X, Y, width, height);
-                        //image = "Images/Grass.png";
+                        //image = "Images/Grass.jpg";
 
                         //context.drawImage(image, x, y, size, size);
                         //x += 50;
@@ -106,9 +106,9 @@
                         //{
                         //    case "home":
                         //        break;
-                        //    case "mouse":
+                        //    case "mouse": /* Shouldn't there be code in here? */
                         //        break;
-                        //    case "grass":
+                        //    case "empty":
                         //        break;
                         //    default:
                         //        break;
@@ -266,7 +266,7 @@
 
         //////////////////////////////////////////////////////////////////Back ups
         //////////////////////////////////////////////////////////////////
-  //                Actual Locations
+    //              Actual Locations
     //            mapMatrix[0][0] = home;
     //            mapMatrix[1][0] = rockWall;
     //            mapMatrix[2][0] = sun;
@@ -328,8 +328,10 @@
         </script>
   </head >
             <body>
-                <canvas id="myCanvas" width="800" height="800">
+                <canvas id="myCanvas" width="800" height="400">
                     <!-- Insert fallback content here --> </canvas>
+
+                
                 <button id="change"></button>
             </body> 
 </html >
