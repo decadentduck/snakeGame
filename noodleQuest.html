@@ -91,14 +91,14 @@
                     for (var j = 0, len2 = mapMatrix[i].length; j < len2; j++) {
                         // accesses each element of each sub-array in turn
                         console.log(mapMatrix[i][j]);
-                        _image.src = "Images/Snake.png";
-                        //if (mapMatrix[i][j] == "home") { _image.src = "Images/Home.jpg"; }
-                        //else if (mapMatrix[i][j] == "mouse") { _image.src = "Images/Mouse.jpg"; }
-                        //else if (mapMatrix[i][j] == "empty") { _image.src = "Images/Grass.jpg"; }
-                        //else if (mapMatrix[i][j] == "rockWall") { _image.src = "Images/Rock.jpg"; }
-                        //else if (mapMatrix[i][j] == "sun") { _image.src = "Images/Sunlight.jpg"; }
-                        //else if (mapMatrix[i][j] == "pointSquare") { _image.src = "Images/PointSquare.jpg"; }
-                        //else { _image.src = "Images/PointSquareRevealed.png";}
+                        //_image.src = "Images/Snake.png";
+                        if (mapMatrix[i][j] == "home") { _image.src = "Images/Home.jpg"; }
+                        else if (mapMatrix[i][j] == "mouse") { _image.src = "Images/Mouse.jpg"; }
+                        else if (mapMatrix[i][j] == "empty") { _image.src = "Images/Grass.jpg"; }
+                        else if (mapMatrix[i][j] == "rockWall") { _image.src = "Images/Rock.jpg"; }
+                        else if (mapMatrix[i][j] == "sun") { _image.src = "Images/Sunlight.jpg"; }
+                        else if (mapMatrix[i][j] == "pointSquare") { _image.src = "Images/PointSquare.jpg"; }
+                        else { _image.src = "Images/PointSquareRevealed.png";}
                           
                         x = size * i;
                         y = size * j;
@@ -147,11 +147,23 @@
 
             var mapMatrix = // width 5 height 15
                 [
-                    ["home", "rockWall", "sun", "empty", "empty", "empty", "empty", "empty", "empty", "rockWall", "rockWall", "sun", "empty", "empty", "empty"],
-                    ["empty", "rockWall", "empty", "empty", "empty", "empty", "empty", "empty", "sun", "rockWall", "rockWall", "empty", "empty", "empty", "sun"],
-                    ["empty", "empty", "empty", "empty", "sun", "empty", "empty", "rockWall", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
-                    ["empty", "empty", "rockWall", "empty", "rockWall", "rockWall", "empty", "empty", "empty", "empty", "empty", "rockWall", "empty", "rockWall", "empty"],
-                    ["sun", "empty", "empty", "empty", "rockWall", "rockWall", "sun", "empty", "empty", "empty", "empty", "sun", "empty", "rockWall", "mouse"]
+
+                    ["home", "empty", "empty", "empty", "sun"],
+                    ["rockWall", "rockWall", "empty", "empty", "empty"],
+                    ["sun", "empty", "empty", "rockWall", "empty"],
+                    ["empty", "empty", "empty", "empty", "empty"],
+                    ["empty", "empty", "sun", "rockWall", "rockWall"],
+                    ["empty", "empty", "empty", "rockWall", "rockWall"],
+                    ["empty", "empty", "empty", "empty", "sun"],
+                    ["empty", "empty", "rockWall", "empty", "empty"],
+                    ["empty", "sun", "empty", "empty", "empty"],
+                    ["rockWall", "rockWall", "empty", "empty", "empty"],
+                    ["rockWall", "rockWall", "empty", "empty", "empty"],
+                    ["rockWall", "rockWall", "empty", "rockWall", "sun"],
+                    ["sun", "empty", "empty", "empty", "empty"],
+                    ["empty", "empty", "empty", "rockWall", "rockWall"],
+                    ["empty", "sun", "empty", "empty", "mouse"]
+
                 ];
           
             var map =
