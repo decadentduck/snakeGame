@@ -14,6 +14,8 @@
                     positionY: 0,
                     size:50,
                     warmth: 10,
+                    x: 0,
+                    y: 0,
 
                     //directions
                     idle: 0,
@@ -21,8 +23,7 @@
                     up: 2,
                     down: 3,
                     right: 4,
-
-                    //TODO fix place holder below
+                    
                     image: "Images/Snake.png",
                     hasMouse: false,
                     Update: function ()
@@ -34,16 +35,32 @@
                         switch (player.direction)
                         {
                             case player.left:
-                                if (player.positionX > 0) { player.positionX -= 50; }
+                                if (player.positionX > 0)
+                                {
+                                    player.positionX -= 50;
+                                    x -= 1;
+                                }
                                 break;
                             case player.up:
-                                if (player.positionY > 0) { player.positionY -= 50; }
+                                if (player.positionY > 0)
+                                {
+                                    player.positionY -= 50;
+                                    y -= 1;
+                                }
                                 break;
                             case player.down:
-                                if (player.positionY < (50 * 4)) { player.positionY += 50; }
+                                if (player.positionY < (50 * 4))
+                                {
+                                    player.positionY += 50;
+                                    y += 1;
+                                }
                                 break;
                             case player.right:
-                                if (player.positionX < (50 * 14)) { player.positionX += 50; }
+                                if (player.positionX < (50 * 14))
+                                {
+                                    player.positionX += 50;
+                                    x += 1;
+                                }
                                 break;
                             default:
                                 break;
@@ -136,8 +153,6 @@
                         {
                             context.drawImage(pointImage, x, y, size, size);
                         }
-                        //else { _image.src = "Images/PointSquareRevealed.png";}
-                        //context.drawImage(_image, x, y, size, size);
                     };
                 };
                 //_image.src = "Images/Grass.jpg";
