@@ -74,6 +74,19 @@
             window.addEventListener("keyup", keyupHandler, false);
             window.addEventListener("keydown", keydownHandler, false);
 
+            var sunImage = new Image();
+            sunImage.src = "Images/Sunlight.jpg";
+            var grassImage = new Image();
+            grassImage.src = "Images/Grass.jpg";
+            mouseImage = new Image();
+            mouseImage.src = "Images/Mouse.jpg";
+            houseImage = new Image();
+            houseImage.src = "Images/Home.jpg";
+            rockImage = new Image();
+            rockImage.src = "Images/Rock.jpg";
+            pointImage = new Image();
+            pointImage.src = "Images/PointSquare.jpg";
+
             function render()
             {
                 //clear the screen
@@ -84,27 +97,52 @@
                 var x = 1;
                 var y = 1;
                 var size = 50;
-                
+                var i = 0;
+                var j = 0;
                 // outer loop applies to outer array
-                for (var i = 0, len = mapMatrix.length; i < len; i++) {
+                for (i = 0, len = mapMatrix.length; i < len; i++)
+                {
                     // inner loop applies to sub-arrays
-                    for (var j = 0, len2 = mapMatrix[i].length; j < len2; j++) {
+                    for (j = 0, len2 = mapMatrix[i].length; j < len2; j++)
+                    {
                         // accesses each element of each sub-array in turn
                         console.log(mapMatrix[i][j]);
-                        //_image.src = "Images/Snake.png";
-                        if (mapMatrix[i][j] == "home") { _image.src = "Images/Home.jpg"; }
-                        else if (mapMatrix[i][j] == "mouse") { _image.src = "Images/Mouse.jpg"; }
-                        else if (mapMatrix[i][j] == "empty") { _image.src = "Images/Grass.jpg"; }
-                        else if (mapMatrix[i][j] == "rockWall") { _image.src = "Images/Rock.jpg"; }
-                        else if (mapMatrix[i][j] == "sun") { _image.src = "Images/Sunlight.jpg"; }
-                        else if (mapMatrix[i][j] == "pointSquare") { _image.src = "Images/PointSquare.jpg"; }
-                        else { _image.src = "Images/PointSquareRevealed.png";}
-                          
+                        _image.src = "Images/Snake.png";
+
                         x = size * i;
                         y = size * j;
-                        context.drawImage(_image, x, y, size, size);
+
+                        if (mapMatrix[i][j] == "empty")
+                        {
+                            context.drawImage(grassImage, x, y, size, size);
+                        }
+                        if (mapMatrix[i][j] == "home")
+                        {
+                            context.drawImage(houseImage, x, y, size, size);
+                        }
+                        if (mapMatrix[i][j] == "mouse")
+                        {
+                            context.drawImage(mouseImage, x, y, size, size);
+                        }
+                        if (mapMatrix[i][j] == "rockWall")
+                        {
+                            context.drawImage(rockImage, x, y, size, size);
+                        }
+                        if (mapMatrix[i][j] == "sun")
+                        {
+                            context.drawImage(sunImage, x, y, size, size);
+                        }
+                        if (mapMatrix[i][j] == "pointSquare")
+                        {
+                            context.drawImage(pointImage, x, y, size, size);
+                        }
+                        //else { _image.src = "Images/PointSquareRevealed.png";}
+                        //context.drawImage(_image, x, y, size, size);
                     };
                 };
+                //_image.src = "Images/Grass.jpg";
+                //_image.src = "Images/Sunlight.jpg";
+                //drawImage.src = "Images/Snake.png";
                 //DrawPlayer
                 context.drawImage(drawImage, player.positionX, player.positionY, player.size, player.size);
 
@@ -147,7 +185,6 @@
 
             var mapMatrix = // width 5 height 15
                 [
-
                     ["home", "empty", "empty", "empty", "sun"],
                     ["rockWall", "rockWall", "empty", "empty", "empty"],
                     ["sun", "empty", "empty", "rockWall", "empty"],
