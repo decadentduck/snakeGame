@@ -7,7 +7,6 @@
     <script type="text/javascript">
         $(document).ready(function ()
         {
-            var curGame = new initialize();
             var player =
                 {
                     //TODO decide values
@@ -64,7 +63,6 @@
 
                         //TODO If home and hasMouse = true, display win screen
                     }
-
                 };
 
             var canvas = $("#myCanvas");
@@ -73,7 +71,6 @@
             var drawImage = new Image();
             drawImage.src = player.image;
             drawImage.addEventListener("load", render, false);
-            //drawImage.addEventListener("load", map.createMatrix, false);
             window.addEventListener("keyup", keyupHandler, false);
             window.addEventListener("keydown", keydownHandler, false);
 
@@ -87,41 +84,6 @@
                 var x = 1;
                 var y = 1;
                 var size = 50;
-
-                //for each x position
-                for (var i = 0; i < 15; i++)
-                {
-                    //for each y position
-                    for (var j = 0; j < 5; j++)
-                    {
-                        //draw the square
-                        //mapMatrix[i][j]
-                        //drawingSurface.drawImage(image, X, Y, width, height);
-                        //image = "Images/Grass.jpg";
-
-                        //context.drawImage(image, x, y, size, size);
-                        //x += 50;
-                        //y += 50;
-                        //switch (mapMatrix[i][j])
-                        //{
-                        //    case "home":
-                        //        break;
-                        //    case "mouse":
-                        //        break;
-                        //    case "empty":
-                        //        break;
-                        //    default:
-                        //        break;
-
-                        //};
-                        //context.drawImage("Images/Grass.png", 100, 100, 50, 50);
-                        _image.src = "Images/Grass.jpg";
-                        //if (mapMatrix[i][j] == "home") { _image.src = "Images/Home.jpg"; }
-                        x = size * i;
-                        y = size * j;
-                        context.drawImage(_image, x, y, size, size);
-                    };
-                };
                 
                 // outer loop applies to outer array
                 for (var i = 0, len = mapMatrix.length; i < len; i++) {
@@ -129,22 +91,15 @@
                     for (var j = 0, len2 = mapMatrix[i].length; j < len2; j++) {
                         // accesses each element of each sub-array in turn
                         console.log(mapMatrix[i][j]);
+                        _image.src = "Images/Snake.png";
                         //if (mapMatrix[i][j] == "home") { _image.src = "Images/Home.jpg"; }
-                        switch (mapMatrix[i][j])
-                        {
-                            case "home":
-                                _image.src = "Images/Home.jpg";
-                                break;
-                            case "mouse":
-                                _image.src = "Images/Mouse.jpg";
-                                break;
-                            case "empty":
-                                _image.src = "Images/Grass.jpg";
-                                break;
-                            default:
-                                _image.src = "Images/Home.jpg";
-                                break;
-                        };
+                        //else if (mapMatrix[i][j] == "mouse") { _image.src = "Images/Mouse.jpg"; }
+                        //else if (mapMatrix[i][j] == "empty") { _image.src = "Images/Grass.jpg"; }
+                        //else if (mapMatrix[i][j] == "rockWall") { _image.src = "Images/Rock.jpg"; }
+                        //else if (mapMatrix[i][j] == "sun") { _image.src = "Images/Sunlight.jpg"; }
+                        //else if (mapMatrix[i][j] == "pointSquare") { _image.src = "Images/PointSquare.jpg"; }
+                        //else { _image.src = "Images/PointSquareRevealed.png";}
+                          
                         x = size * i;
                         y = size * j;
                         context.drawImage(_image, x, y, size, size);
@@ -173,8 +128,7 @@
                 if (event.keyCode == 83) { /*move down*/ player.direction = player.down; }
                 if (event.keyCode == 68) { /*move right*/ player.direction = player.right; }
                 if (event.keyCode != 65 && event.keyCode != 68 && event.keyCode != 83 && event.keyCode != 87)
-                { player.direction = 10; }
-
+                { player.direction = player.idle; }
             };
             
             function Tile(_type, _image, _size)
@@ -190,6 +144,7 @@
                 this.positionX = _x;
                 this.positionY = _y;
             };
+
             var mapMatrix = // width 5 height 15
                 [
                     ["home", "rockWall", "sun", "empty", "empty", "empty", "empty", "empty", "empty", "rockWall", "rockWall", "sun", "empty", "empty", "empty"],
@@ -197,20 +152,8 @@
                     ["empty", "empty", "empty", "empty", "sun", "empty", "empty", "rockWall", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
                     ["empty", "empty", "rockWall", "empty", "rockWall", "rockWall", "empty", "empty", "empty", "empty", "empty", "rockWall", "empty", "rockWall", "empty"],
                     ["sun", "empty", "empty", "empty", "rockWall", "rockWall", "sun", "empty", "empty", "empty", "empty", "sun", "empty", "rockWall", "mouse"]
-            ];
-            mapMatrix.addEventListener("load", initialize, false);
-            function initialize()
-            {
-                //Creation of board
-                //mapMatrix = new Array(8);
-                //for (var x = 0; x < 8; x++) {
-                //    mapMatrix[x] = new Array(8);
-                //    for (var y = 0; y < 8; y++) {
-                //        mapMatrix[x][y] = "home";
-                //    }
-                //}
-            };
-
+                ];
+          
             var map =
                 {
                     size: 50,
@@ -221,59 +164,7 @@
                     sun: Tile(3, "Images/Sunlight.jpg", size),
                     pointsTile: Tile(4, "Images/PointSquare.jpg", size),
                     rockWall: Tile(5, "Images/Rock.jpg", size),
-
-                    //Matrix of tile objects
-                    //instantiate the array
                     
-                    createMatrix: function ()
-                    {
-                       
-                        //set every value to zero
-                        //for (i = 0; i < iMax; i++)
-                        //{
-                        //    mapMatrix[i] = new Array();
-                        //    for (j = 0; j < jMax; j++)
-                        //    {
-                        //        mapMatrix[i][j] = empty;
-                        //    }
-                        //}
-
-                        //manually input everything that is a thing
-                        //mapMatrix[x][y] = tileName;
-
-                        //            mapMatrix[0][0] = home;
-                        //            mapMatrix[1][0] = rockWall;
-                        //            mapMatrix[2][0] = sun;
-                        //            mapMatrix[9][0] = rockWall;
-                        //            mapMatrix[10][0] = rockWall;
-                        //            mapMatrix[11][0] = sun;
-
-                        //            mapMatrix[1][1] = rockWall;
-                        //            mapMatrix[7][1] = sun;
-                        //            mapMatrix[9][1] = rockWall;
-                        //            mapMatrix[10][1] = rockWall;
-                        //            mapMatrix[14][1] = sun;
-
-                        //            mapMatrix[4][2] = sun;
-                        //            mapMatrix[7][2] = rockWall;
-
-                        //            mapMatrix[2][5] = rockWall;
-                        //            mapMatrix[4][5] = rockWall;
-                        //            mapMatrix[5][5] = rockWall;
-                        //            mapMatrix[11][5] = rockWall;
-                        //            mapMatrix[13][5] = rockWall;
-
-                        //            mapMatrix[0][4] = sun;
-                        //            mapMatrix[4][4] = rockWall;
-                        //            mapMatrix[5][4] = rockWall;
-                        //            mapMatrix[6][4] = sun;
-                        //            mapMatrix[11][4] = sun;
-                        //            mapMatrix[13][4] = rockWall;
-                        //            mapMatrix[14][4] = mouse;
-
-                        //for convenience the two hawks are at [2][6] and [10][4]
-                    },
-
                     //Hawk array of 2
                     hawk1: Hawk(3, 3),
                     hawk2: Hawk(3, 3),
@@ -297,6 +188,7 @@
                 //TODO Game Over pop- up
                 //TODO Refresh button
             };
+
             function Sidebar()
             {
                 //TODO Title of game
@@ -305,76 +197,13 @@
                 //TODO displays player.hasMouse
                 //TODO Instructions
             };
-        });
-
-        //////////////////////////////////////////////////////////////////Back ups
-        //////////////////////////////////////////////////////////////////
-    //              Actual Locations
-    //            mapMatrix[0][0] = home;
-    //            mapMatrix[1][0] = rockWall;
-    //            mapMatrix[2][0] = sun;
-    //            mapMatrix[9][0] = rockWall;
-    //            mapMatrix[10][0] = rockWall;
-    //            mapMatrix[11][0] = sun;
-
-    //            mapMatrix[1][1] = rockWall;
-    //            mapMatrix[7][1] = sun;
-    //            mapMatrix[9][1] = rockWall;
-    //            mapMatrix[10][1] = rockWall;
-    //            mapMatrix[14][1] = sun;
-
-    //            mapMatrix[4][2] = sun;
-    //            mapMatrix[7][2] = rockWall;
-
-    //            mapMatrix[2][5] = rockWall;
-    //            mapMatrix[4][5] = rockWall;
-    //            mapMatrix[5][5] = rockWall;
-    //            mapMatrix[11][5] = rockWall;
-    //            mapMatrix[13][5] = rockWall;
-
-    //            mapMatrix[0][4] = sun;
-    //            mapMatrix[4][4] = rockWall;
-    //            mapMatrix[5][4] = rockWall;
-    //            mapMatrix[6][4] = sun;
-    //            mapMatrix[11][4] = sun;
-    //            mapMatrix[13][4] = rockWall;
-    //            mapMatrix[14][4] = mouse;
-        
-                //function Render()
-                //{
-                //    //clear the screen
-                //    drawingSurface.clearRect(0, 0, canvas.width, canvas.height);
-                //    //TODO DrawMap
-
-                //    //draw player
-                //    drawingSurface.drawImage(_image, 10, 10, 50, 50);
-
-                //    //for each x position
-                //    for (i = 0; i < map.iMax; i++)
-                //    {
-                //        //for each y position
-                //        for (j = 0; j < map.jMax; j++)
-                //        {
-                //            //draw the square
-                //            //mapMatrix[i][j]
-                //            //drawingSurface.drawImage(image, X, Y, width, height);
-                //            image = mapMatrix[i][j].image
-                //            drawingSurface.drawImage(image, (i * mapMatrix[i][j].size),
-                //                (j * mapMatrix[i][j].size), mapMatrix[i][j].size, mapMatrix[i][j].size);
-                //        }
-                //    }
-                    //TODO DrawPlayer
-                    //TODO DrawSidebar
-                //}
-
-                
+        });    
         </script>
   </head >
             <body>
                 <canvas id="myCanvas" width="800" height="400">
                     <!-- Insert fallback content here --> </canvas>
 
-                
                 <button id="change"></button>
             </body> 
 </html >
