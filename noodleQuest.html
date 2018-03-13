@@ -7,6 +7,7 @@
     <script type="text/javascript">
         $(document).ready(function ()
         {
+            var curGame = new initialize();
             var player =
                 {
                     //TODO decide values
@@ -34,16 +35,16 @@
                         switch (player.direction)
                         {
                             case player.left:
-                                player.positionX -= 50; 
+                                if (player.positionX > 0) { player.positionX -= 50; }
                                 break;
                             case player.up:
-                                player.positionY -= 50; 
+                                if (player.positionY > 0) { player.positionY -= 50; }
                                 break;
                             case player.down:
-                                player.positionY += 50; 
+                                if (player.positionY < (50 * 4)) { player.positionY += 50; }
                                 break;
                             case player.right:
-                                player.positionX += 50; 
+                                if (player.positionX < (50 * 14)) { player.positionX += 50; }
                                 break;
                             default:
                                 break;
@@ -90,7 +91,7 @@
                 //for each x position
                 for (var i = 0; i < 15; i++)
                 {
-                        //for each y position
+                    //for each y position
                     for (var j = 0; j < 5; j++)
                     {
                         //draw the square
@@ -101,7 +102,6 @@
                         //context.drawImage(image, x, y, size, size);
                         //x += 50;
                         //y += 50;
-
                         //switch (mapMatrix[i][j])
                         //{
                         //    case "home":
@@ -112,15 +112,44 @@
                         //        break;
                         //    default:
                         //        break;
+
                         //};
                         //context.drawImage("Images/Grass.png", 100, 100, 50, 50);
                         _image.src = "Images/Grass.jpg";
+                        //if (mapMatrix[i][j] == "home") { _image.src = "Images/Home.jpg"; }
                         x = size * i;
                         y = size * j;
                         context.drawImage(_image, x, y, size, size);
                     };
                 };
-
+                
+                // outer loop applies to outer array
+                for (var i = 0, len = mapMatrix.length; i < len; i++) {
+                    // inner loop applies to sub-arrays
+                    for (var j = 0, len2 = mapMatrix[i].length; j < len2; j++) {
+                        // accesses each element of each sub-array in turn
+                        console.log(mapMatrix[i][j]);
+                        //if (mapMatrix[i][j] == "home") { _image.src = "Images/Home.jpg"; }
+                        switch (mapMatrix[i][j])
+                        {
+                            case "home":
+                                _image.src = "Images/Home.jpg";
+                                break;
+                            case "mouse":
+                                _image.src = "Images/Mouse.jpg";
+                                break;
+                            case "empty":
+                                _image.src = "Images/Grass.jpg";
+                                break;
+                            default:
+                                _image.src = "Images/Home.jpg";
+                                break;
+                        };
+                        x = size * i;
+                        y = size * j;
+                        context.drawImage(_image, x, y, size, size);
+                    };
+                };
                 //DrawPlayer
                 context.drawImage(drawImage, player.positionX, player.positionY, player.size, player.size);
 
@@ -143,6 +172,8 @@
                 if (event.keyCode == 87) { /*move up*/ player.direction = player.up; }
                 if (event.keyCode == 83) { /*move down*/ player.direction = player.down; }
                 if (event.keyCode == 68) { /*move right*/ player.direction = player.right; }
+                if (event.keyCode != 65 && event.keyCode != 68 && event.keyCode != 83 && event.keyCode != 87)
+                { player.direction = 10; }
 
             };
             
@@ -159,14 +190,27 @@
                 this.positionX = _x;
                 this.positionY = _y;
             };
-            var mapMatrix=
+            var mapMatrix = // width 5 height 15
                 [
                     ["home", "rockWall", "sun", "empty", "empty", "empty", "empty", "empty", "empty", "rockWall", "rockWall", "sun", "empty", "empty", "empty"],
                     ["empty", "rockWall", "empty", "empty", "empty", "empty", "empty", "empty", "sun", "rockWall", "rockWall", "empty", "empty", "empty", "sun"],
                     ["empty", "empty", "empty", "empty", "sun", "empty", "empty", "rockWall", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
                     ["empty", "empty", "rockWall", "empty", "rockWall", "rockWall", "empty", "empty", "empty", "empty", "empty", "rockWall", "empty", "rockWall", "empty"],
                     ["sun", "empty", "empty", "empty", "rockWall", "rockWall", "sun", "empty", "empty", "empty", "empty", "sun", "empty", "rockWall", "mouse"]
-                ];
+            ];
+            mapMatrix.addEventListener("load", initialize, false);
+            function initialize()
+            {
+                //Creation of board
+                //mapMatrix = new Array(8);
+                //for (var x = 0; x < 8; x++) {
+                //    mapMatrix[x] = new Array(8);
+                //    for (var y = 0; y < 8; y++) {
+                //        mapMatrix[x][y] = "home";
+                //    }
+                //}
+            };
+
             var map =
                 {
                     size: 50,
@@ -180,7 +224,6 @@
 
                     //Matrix of tile objects
                     //instantiate the array
-
                     
                     createMatrix: function ()
                     {
