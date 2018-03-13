@@ -102,17 +102,17 @@
                         //x += 50;
                         //y += 50;
 
-                        switch (mapMatrix[i][j])
-                        {
+                        //switch (mapMatrix[i][j])
+                        //{
                         //    case "home":
                         //        break;
-                        //    case "mouse": /* Shouldn't there be code in here? */
+                        //    case "mouse":
                         //        break;
                         //    case "empty":
                         //        break;
                         //    default:
                         //        break;
-                        };
+                        //};
                         //context.drawImage("Images/Grass.png", 100, 100, 50, 50);
                         _image.src = "Images/Grass.jpg";
                         x = size * i;
@@ -161,11 +161,11 @@
             };
             var mapMatrix=
                 [
-                    [map.home, map.rockWall, map.sun, map.empty, map.empty, map.empty, map.empty, map.empty, map.empty, map.rockWall, map.rockWall, map.sun, map.empty, map.empty, map.empty],
-                    [map.empty, map.rockWall, map.empty, map.empty, map.empty, map.empty, map.empty, map.empty, map.sun, map.rockWall, map.rockWall, map.empty, map.empty, map.empty, map.sun],
-                    [map.empty, map.empty, map.empty, map.empty, map.sun, map.empty, map.empty, map.rockWall, map.empty, map.empty, map.empty, map.empty, map.empty, map.empty, map.empty],
-                    [map.empty, map.empty, map.rockWall, map.empty, map.rockWall, map.rockWall, map.empty, map.empty, map.empty, map.empty, map.empty, map.rockWall, map.empty, map.rockWall, map.empty],
-                    [map.sun, map.empty, map.empty, map.empty, map.rockWall, map.rockWall, map.sun, map.empty, map.empty, map.empty, map.empty, map.sun, map.empty, map.rockWall, map.mouse],
+                    ["home", "rockWall", "sun", "empty", "empty", "empty", "empty", "empty", "empty", "rockWall", "rockWall", "sun", "empty", "empty", "empty"],
+                    ["empty", "rockWall", "empty", "empty", "empty", "empty", "empty", "empty", "sun", "rockWall", "rockWall", "empty", "empty", "empty", "sun"],
+                    ["empty", "empty", "empty", "empty", "sun", "empty", "empty", "rockWall", "empty", "empty", "empty", "empty", "empty", "empty", "empty"],
+                    ["empty", "empty", "rockWall", "empty", "rockWall", "rockWall", "empty", "empty", "empty", "empty", "empty", "rockWall", "empty", "rockWall", "empty"],
+                    ["sun", "empty", "empty", "empty", "rockWall", "rockWall", "sun", "empty", "empty", "empty", "empty", "sun", "empty", "rockWall", "mouse"]
                 ];
             var map =
                 {
