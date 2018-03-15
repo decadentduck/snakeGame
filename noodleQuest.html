@@ -41,34 +41,35 @@
                         image: "Images/Snake.png",
                         hasMouse: false,
                         Update: function () {
-                            //move player based on direction 
+                            //move player based on direction
+                            player.x = player.positionX / player.size;
+                            player.y = player.positionY / player.size;
+
                             switch (player.direction) {
                                 case player.left:
                                     if (player.positionX > 0)
                                     {
-                                        //if (mapMatrix[x][y] == "rockWall") { x += 1; }
-                                        //else { player.positionX -= 50;}
-                                        player.positionX -= 50;
-                                        x -= 1;
+                                        if (mapMatrix[player.x][player.y] != "rockWall") { player.positionX -= player.size; }
+                                        
+                                        //player.positionX -= player.size;
                                     }
                                     break;
                                 case player.up:
                                     if (player.positionY > 0)
                                     {
-                                        player.positionY -= 50;
-                                        y -= 1;
+                                        player.positionY -= player.size;
                                     }
                                     break;
                                 case player.down:
-                                    if (player.positionY < (50 * 4)) {
-                                        player.positionY += 50;
-                                        y += 1;
+                                    if (player.positionY < (player.size * 4))
+                                    {
+                                        player.positionY += player.size;
                                     }
                                     break;
                                 case player.right:
-                                    if (player.positionX < (50 * 14)) {
-                                        player.positionX += 50;
-                                        x += 1;
+                                    if (player.positionX < (player.size * 14))
+                                    {
+                                        player.positionX += player.size;
                                     }
                                     break;
                                 default:
