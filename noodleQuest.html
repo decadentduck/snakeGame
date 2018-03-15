@@ -210,11 +210,11 @@
                         ["sun", "empty", "empty", "rockWall", "empty"],
                         ["empty", "empty", "empty", "empty", "empty"],
                         ["empty", "empty", "sun", "rockWall", "rockWall"],
-                        ["empty", "empty", "empty", "rockWall", "rockWall"],
+                        ["empty", "pointSquare", "empty", "rockWall", "rockWall"],
                         ["empty", "empty", "empty", "empty", "sun"],
                         ["empty", "empty", "rockWall", "empty", "empty"],
                         ["empty", "sun", "empty", "empty", "empty"],
-                        ["rockWall", "rockWall", "empty", "empty", "empty"],
+                        ["rockWall", "rockWall", "empty", "pointSquare", "empty"],
                         ["rockWall", "rockWall", "empty", "empty", "empty"],
                         ["sun", "empty", "empty", "rockWall", "sun"],
                         ["empty", "empty", "empty", "empty", "empty"],
@@ -251,12 +251,28 @@
         </script>
   </head >
 <body>
-
+    <h1>Noodle's Quest</h1>
     <canvas id="myCanvas" width="800" height="300">
         <!-- Insert fallback content here -->
     </canvas>
-    <p id="characterSheet" style="position: absolute; left: 800px; top: 0px;">Character Stats</p>
-    <p style="position: absolute; left: 800px; top: 20px;"> Put game instructions here</p>
+    
+    <p style="position: absolute; left: 800px; top: 50px;"> Fluffy the noodle sets out on his quest for dinner. 
+                                                            Use the arrow keys to move the snake to the other side of the plain where the mouse is hiding, and then return home. 
+                                                            Take your time with each move, don’t get viper-active.</p>
+
+    <p style="position: absolute; left: 800px; top: 100px;">Watch out for the two hawks who are also looking for lunch. 
+                                                           Unlike you, they’re big aspholes. 
+                                                           Don’t let them catch you or it will most serpently end the game.</p>
+
+    <p style="position: absolute; left: 800px; top: 150px;">Keep an eye on your warmth, because snakes are cool, they have to keep warm. 
+                                                           If your warmth hits 0 you’re done for. Get more warmth by moving yourself on a sunny square. 
+                                                           Being warm  feels fangtastic.</p>
+
+    <p style="position: absolute; left: 800px; top: 200px;">Do it in the least amount of moves possible to get the high score and go down in Hisstory! 
+                                                           If you don’t win, don’t be rattled, you can’t venom all.</p>
+    
+    <b><p id="characterSheet" style="position: absolute; left: 800px; top: 300px;">Character Stats</p></b>
+
     <!--<button id="change"></button>-->
 </body> 
 </html >
