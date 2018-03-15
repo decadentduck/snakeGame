@@ -44,29 +44,31 @@
                             //move player based on direction 
                             switch (player.direction) {
                                 case player.left:
-                                    if (player.positionX > 0) {
-                                        //if (mapMatrix[x][y] == "rock") { x += 1; }
+                                    if (player.positionX > 0)
+                                    {
+                                        //if (mapMatrix[x][y] == "rockWall") { x += 1; }
                                         //else { player.positionX -= 50;}
                                         player.positionX -= 50;
-                                        //x -= 1;
+                                        x -= 1;
                                     }
                                     break;
                                 case player.up:
-                                    if (player.positionY > 0) {
+                                    if (player.positionY > 0)
+                                    {
                                         player.positionY -= 50;
-                                        //y -= 1;
+                                        y -= 1;
                                     }
                                     break;
                                 case player.down:
                                     if (player.positionY < (50 * 4)) {
                                         player.positionY += 50;
-                                        //y += 1;
+                                        y += 1;
                                     }
                                     break;
                                 case player.right:
                                     if (player.positionX < (50 * 14)) {
                                         player.positionX += 50;
-                                        //x += 1;
+                                        x += 1;
                                     }
                                     break;
                                 default:
@@ -162,13 +164,7 @@
                     if (event.keyCode == 68) { /*move right*/ player.direction = player.right; }
                     if (event.keyCode != 65 && event.keyCode != 68 && event.keyCode != 83 && event.keyCode != 87) { player.direction = player.idle; }
                 };
-
-                //function Tile(_type, _image, _size) {
-                //    this.type = _type;
-                //    this.image = _image;
-                //    this.size = _size;
-                //};
-
+                
                 //function Hawk(_x, _y) {
                 //    this.image = "Images/Hawk.jpg";
                 //    this.positionX = _x;
@@ -196,8 +192,8 @@
 
                     ]
 
-                //var map =
-                    //{
+                var map =
+                    {
                         //size: 50,
                         //home: Tile(0, "Images/Home.jpg", size),
                         //mouse: Tile(1, "Images/Mouse.jpg", size),
@@ -221,7 +217,7 @@
                             //TODO If(player.location = hawk.location) Game over
                             //TODO Decrease score by 1
                         //},
-                    //};
+                    };
                  //function GameOver()
         //{
         //    //TODO Game Over pop- up
