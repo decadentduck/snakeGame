@@ -9,25 +9,19 @@
             {
                 var canvas = $("#myCanvas");
                 var context = canvas.get(0).getContext("2d");
-                //var sunImage;
-                //var grassImage;
-                //var mouseImage;
-                //var houseImage;
-                //var rockImage;
-                //var pointImage;
-
-                //sunImage = new Image();
-                //sunImage.src = "Images/Sunlight.jpg";
-                //grassImage = new Image();
-                //grassImage.src = "Images/Grass.jpg";
-                //mouseImage = new Image();
-                //mouseImage.src = "Images/Mouse.jpg";
-                //houseImage = new Image();
-                //houseImage.src = "Images/Home.jpg";
-                //rockImage = new Image();
-                //rockImage.src = "Images/Rock.jpg";
-                //pointImage = new Image();
-                //pointImage.src = "Images/PointSquare.jpg";
+               
+                var sunImage = new Image();
+                sunImage.src = "Images/Sunlight.jpg";
+                var grassImage = new Image();
+                grassImage.src = "Images/Grass.jpg";
+                var mouseImage = new Image();
+                mouseImage.src = "Images/Mouse.jpg";
+                var houseImage = new Image();
+                houseImage.src = "Images/Home.jpg";
+                var rockImage = new Image();
+                rockImage.src = "Images/Rock.jpg";
+                var pointImage = new Image();
+                pointImage.src = "Images/PointSquare.jpg";
                 var player =
                     {
                         positionX: 0,
@@ -106,46 +100,46 @@
                     //clear the screen
                     context.clearRect(0, 0, 800, 800);
 
-                    ////DrawMap
-                    //var _image = new Image();
-                    //var x = 1;
-                    //var y = 1;
-                    //var size = 50;
-                    //var i = 0;
-                    //var j = 0;
-                    //// outer loop applies to outer array
-                    //for (i = 0, len = mapMatrix.length; i < len; i++)
-                    //{
-                    //    // inner loop applies to sub-arrays
-                    //    for (j = 0, len2 = mapMatrix[i].length; j < len2; j++)
-                    //    {
-                    //        // accesses each element of each sub-array in turn
-                    //        console.log(mapMatrix[i][j]);
-                    //        _image.src = "Images/Snake.png";
+                    //DrawMap
+                    var _image = new Image();
+                    var x = 1;
+                    var y = 1;
+                    var size = 50;
+                    var i = 0;
+                    var j = 0;
+                    // outer loop applies to outer array
+                    for (i = 0, len = mapMatrix.length; i < len; i++)
+                    {
+                        // inner loop applies to sub-arrays
+                        for (j = 0, len2 = mapMatrix[i].length; j < len2; j++)
+                        {
+                            // accesses each element of each sub-array in turn
+                            console.log(mapMatrix[i][j]);
+                            _image.src = "Images/Snake.png";
 
-                    //        x = size * i;
-                    //        y = size * j;
+                            x = size * i;
+                            y = size * j;
 
-                    //        if (mapMatrix[i][j] == "empty") {
-                    //            context.drawImage(grassImage, x, y, size, size);
-                    //        }
-                    //        if (mapMatrix[i][j] == "home") {
-                    //            context.drawImage(houseImage, x, y, size, size);
-                    //        }
-                    //        if (mapMatrix[i][j] == "mouse") {
-                    //            context.drawImage(mouseImage, x, y, size, size);
-                    //        }
-                    //        if (mapMatrix[i][j] == "rockWall") {
-                    //            context.drawImage(rockImage, x, y, size, size);
-                    //        }
-                    //        if (mapMatrix[i][j] == "sun") {
-                    //            context.drawImage(sunImage, x, y, size, size);
-                    //        }
-                    //        if (mapMatrix[i][j] == "pointSquare") {
-                    //            context.drawImage(pointImage, x, y, size, size);
-                    //        }
-                    //    };
-                    //};
+                            if (mapMatrix[i][j] == "empty") {
+                                context.drawImage(grassImage, x, y, size, size);
+                            }
+                            if (mapMatrix[i][j] == "home") {
+                                context.drawImage(houseImage, x, y, size, size);
+                            }
+                            if (mapMatrix[i][j] == "mouse") {
+                                context.drawImage(mouseImage, x, y, size, size);
+                            }
+                            if (mapMatrix[i][j] == "rockWall") {
+                                context.drawImage(rockImage, x, y, size, size);
+                            }
+                            if (mapMatrix[i][j] == "sun") {
+                                context.drawImage(sunImage, x, y, size, size);
+                            }
+                            if (mapMatrix[i][j] == "pointSquare") {
+                                context.drawImage(pointImage, x, y, size, size);
+                            }
+                        };
+                    };
                     
                     //DrawPlayer
                     context.drawImage(_drawImage, player.positionX, player.positionY, player.size, player.size);
