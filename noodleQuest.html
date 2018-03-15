@@ -5,270 +5,252 @@
     <meta charset="utf-8">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script type="text/javascript">
-        var canvas = $("#myCanvas");
-        var context = canvas.get(0).getContext("2d");
-        var drawImage;
-        var sunImage;
-        var grassImage;
-        var mouseImage;
-        var houseImage;
-        var rockImage;
-        var pointImage;
-        var player =
-                {
-                    //TODO decide values
-                    positionX: 0,
-                    positionY: 0,
-                    size:50,
-                    warmth: 10,
-                    x: 0,
-                    y: 0,
-
-                    //directions
-                    idle: 0,
-                    left: 1,
-                    up: 2,
-                    down: 3,
-                    right: 4,
-                    
-                    image: "Images/Snake.png",
-                    hasMouse: false,
-                    Update: function ()
-                    {
-                        //move player based on direction 
-                        switch (player.direction)
-                        {
-                            case player.left:
-                                if (player.positionX > 0)
-                                {
-                                    //if (mapMatrix[x][y] == "rock") { x += 1; }
-                                    //else { player.positionX -= 50;}
-                                    player.positionX -= 50;
-                                    x -= 1;
-                                }
-                                break;
-                            case player.up:
-                                if (player.positionY > 0)
-                                {
-                                    player.positionY -= 50;
-                                    y -= 1;
-                                }
-                                break;
-                            case player.down:
-                                if (player.positionY < (50 * 4))
-                                {
-                                    player.positionY += 50;
-                                    y += 1;
-                                }
-                                break;
-                            case player.right:
-                                if (player.positionX < (50 * 14))
-                                {
-                                    player.positionX += 50;
-                                    x += 1;
-                                }
-                                break;
-                            default:
-                                break;
-                        };
-
-                        //TODO (check which squares player is in, lose one heat)
-
-                        //TODO If sunlight, warmth = 10
-
-                        //TODO If(warmth = 0) Game over
-
-                        //TODO If hawk, display game over screen
-
-                        //TODO If points, score += 5
-
-                        //TODO If mouse, hasMouse = true
-
-                        //TODO If home and hasMouse = true, display win screen
-                    }
-                };
-
-        function render()
-            {
-                //clear the screen
-                context.clearRect(0, 0, 800, 800);
-                
-                //TODO DrawMap
-                var _image = new Image();
-                var x = 1;
-                var y = 1;
-                var size = 50;
-                var i = 0;
-                var j = 0;
-                // outer loop applies to outer array
-                for (i = 0, len = mapMatrix.length; i < len; i++)
-                {
-                    // inner loop applies to sub-arrays
-                    for (j = 0, len2 = mapMatrix[i].length; j < len2; j++)
-                    {
-                        // accesses each element of each sub-array in turn
-                        console.log(mapMatrix[i][j]);
-                        _image.src = "Images/Snake.png";
-
-                        x = size * i;
-                        y = size * j;
-
-                        if (mapMatrix[i][j] == "empty")
-                        {
-                            context.drawImage(grassImage, x, y, size, size);
-                        }
-                        if (mapMatrix[i][j] == "home")
-                        {
-                            context.drawImage(houseImage, x, y, size, size);
-                        }
-                        if (mapMatrix[i][j] == "mouse")
-                        {
-                            context.drawImage(mouseImage, x, y, size, size);
-                        }
-                        if (mapMatrix[i][j] == "rockWall")
-                        {
-                            context.drawImage(rockImage, x, y, size, size);
-                        }
-                        if (mapMatrix[i][j] == "sun")
-                        {
-                            context.drawImage(sunImage, x, y, size, size);
-                        }
-                        if (mapMatrix[i][j] == "pointSquare")
-                        {
-                            context.drawImage(pointImage, x, y, size, size);
-                        }
-                    };
-                };
-                //_image.src = "Images/Grass.jpg";
-                //_image.src = "Images/Sunlight.jpg";
-                drawImage.src = "Images/Snake.png";
-                //DrawPlayer
-                context.drawImage(drawImage, player.positionX, player.positionY, player.size, player.size);
-
-                    //TODO DrawSidebar
-            }
-
-        function keyupHandler(event)
-        {
-            player.Update();
-            //map.Update();
-            render();
-        };
-        function keydownHandler(event)
-        {
-            //If(arrow directions) move in that direction
-            if (event.keyCode == 65) { /*move left*/ player.direction = player.left; }
-            if (event.keyCode == 87) { /*move up*/ player.direction = player.up; }
-            if (event.keyCode == 83) { /*move down*/ player.direction = player.down; }
-            if (event.keyCode == 68) { /*move right*/ player.direction = player.right; }
-            if (event.keyCode != 65 && event.keyCode != 68 && event.keyCode != 83 && event.keyCode != 87) { player.direction = player.idle; }
-        };
-
-        function Tile(_type, _image, _size)
-        {
-            this.type = _type;
-            this.image = _image;
-            this.size = _size;
-        };
-
-        function Hawk(_x, _y)
-        {
-            this.image = "Images/Hawk.jpg";
-            this.positionX = _x;
-            this.positionY = _y;
-        };
-
-        var mapMatrix = // width 5 height 15
-            [
-
-                    ["home", "empty", "empty", "empty", "sun"],
-                    ["rockWall", "rockWall", "empty", "empty", "empty"],
-                    ["sun", "empty", "empty", "rockWall", "empty"],
-                    ["empty", "empty", "empty", "empty", "empty"],
-                    ["empty", "empty", "sun", "rockWall", "rockWall"],
-                    ["empty", "empty", "empty", "rockWall", "rockWall"],
-                    ["empty", "empty", "empty", "empty", "sun"],
-                    ["empty", "empty", "rockWall", "empty", "empty"],
-                    ["empty", "sun", "empty", "empty", "empty"],
-                    ["rockWall", "rockWall", "empty", "empty", "empty"],
-                    ["rockWall", "rockWall", "empty", "empty", "empty"],
-                    ["sun", "empty", "empty", "rockWall", "sun"],
-                    ["empty", "empty", "empty", "empty", "empty"],
-                    ["empty", "empty", "empty", "rockWall", "rockWall"],
-                    ["empty", "sun", "empty", "empty", "mouse"]
-
-                ]
-          
-        var map =
-            {
-                size: 50,
-                //TODO figure out if this works
-                home: Tile(0, "Images/Home.jpg", size),
-                mouse: Tile(1, "Images/Mouse.jpg", size),
-                empty: Tile(2, "Images/Grass.jpg", size),
-                sun: Tile(3, "Images/Sunlight.jpg", size),
-                pointsTile: Tile(4, "Images/PointSquare.jpg", size),
-                rockWall: Tile(5, "Images/Rock.jpg", size),
-
-                //Hawk array of 2
-                hawk1: Hawk(3, 3),
-                hawk2: Hawk(3, 3),
-                hawks: [hawk1, hawk2],
-                score,
-
-                Update: function () {
-                    //TODO move hawks using RnG
-                    //Random number 0 - 3
-                    //Math.floor(Math.random() * 4);
-                    //TODO If (number = 0 & hawk.x > 0) Go left
-                    //TODO Etc…
-                    //TODO If(player.location = hawk.location) Game over
-                    //TODO Decrease score by 1
-                },
-            };
-
-        function GameOver()
-        {
-            //TODO Game Over pop- up
-            //TODO Refresh button
-        };
-
-        function Sidebar()
-        {
-            //TODO Title of game
-            //TODO displays map.Score
-            //TODO displays Player.Sunlight
-            //TODO displays player.hasMouse
-            //TODO Instructions
-        };
-
             $(document).ready(function ()
             {
-                drawImage = new Image();
-                drawImage.src = player.image;
-                sunImage = new Image();
-                sunImage.src = "Images/Sunlight.jpg";
-                grassImage = new Image();
-                grassImage.src = "Images/Grass.jpg";
-                mouseImage = new Image();
-                mouseImage.src = "Images/Mouse.jpg";
-                houseImage = new Image();
-                houseImage.src = "Images/Home.jpg";
-                rockImage = new Image();
-                rockImage.src = "Images/Rock.jpg";
-                pointImage = new Image();
-                pointImage.src = "Images/PointSquare.jpg";
+                var canvas = $("#myCanvas");
+                var context = canvas.get(0).getContext("2d");
+                //var sunImage;
+                //var grassImage;
+                //var mouseImage;
+                //var houseImage;
+                //var rockImage;
+                //var pointImage;
 
-                drawImage.addEventListener("load", render, false);
+                //sunImage = new Image();
+                //sunImage.src = "Images/Sunlight.jpg";
+                //grassImage = new Image();
+                //grassImage.src = "Images/Grass.jpg";
+                //mouseImage = new Image();
+                //mouseImage.src = "Images/Mouse.jpg";
+                //houseImage = new Image();
+                //houseImage.src = "Images/Home.jpg";
+                //rockImage = new Image();
+                //rockImage.src = "Images/Rock.jpg";
+                //pointImage = new Image();
+                //pointImage.src = "Images/PointSquare.jpg";
+                var player =
+                    {
+                        positionX: 0,
+                        positionY: 0,
+                        size: 50,
+                        warmth: 10,
+                        x: 0,
+                        y: 0,
+
+                        //directions
+                        idle: 0,
+                        left: 1,
+                        up: 2,
+                        down: 3,
+                        right: 4,
+
+                        image: "Images/Snake.png",
+                        hasMouse: false,
+                        Update: function () {
+                            //move player based on direction 
+                            switch (player.direction) {
+                                case player.left:
+                                    if (player.positionX > 0) {
+                                        //if (mapMatrix[x][y] == "rock") { x += 1; }
+                                        //else { player.positionX -= 50;}
+                                        player.positionX -= 50;
+                                        //x -= 1;
+                                    }
+                                    break;
+                                case player.up:
+                                    if (player.positionY > 0) {
+                                        player.positionY -= 50;
+                                        //y -= 1;
+                                    }
+                                    break;
+                                case player.down:
+                                    if (player.positionY < (50 * 4)) {
+                                        player.positionY += 50;
+                                        //y += 1;
+                                    }
+                                    break;
+                                case player.right:
+                                    if (player.positionX < (50 * 14)) {
+                                        player.positionX += 50;
+                                        //x += 1;
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            };
+
+                            //TODO (check which squares player is in, lose one heat)
+
+                            //TODO If sunlight, warmth = 10
+
+                            //TODO If(warmth = 0) Game over
+
+                            //TODO If hawk, display game over screen
+
+                            //TODO If points, score += 5
+
+                            //TODO If mouse, hasMouse = true
+
+                            //TODO If home and hasMouse = true, display win screen
+                        }
+                    };
+
+                var _drawImage = new Image();
+                _drawImage.src = player.image;
+                _drawImage.addEventListener("load", render, false);
                 window.addEventListener("keyup", keyupHandler, false);
                 window.addEventListener("keydown", keydownHandler, false);
+                
+                
+                function render() {
+                    //clear the screen
+                    context.clearRect(0, 0, 800, 800);
+
+                    ////DrawMap
+                    //var _image = new Image();
+                    //var x = 1;
+                    //var y = 1;
+                    //var size = 50;
+                    //var i = 0;
+                    //var j = 0;
+                    //// outer loop applies to outer array
+                    //for (i = 0, len = mapMatrix.length; i < len; i++)
+                    //{
+                    //    // inner loop applies to sub-arrays
+                    //    for (j = 0, len2 = mapMatrix[i].length; j < len2; j++)
+                    //    {
+                    //        // accesses each element of each sub-array in turn
+                    //        console.log(mapMatrix[i][j]);
+                    //        _image.src = "Images/Snake.png";
+
+                    //        x = size * i;
+                    //        y = size * j;
+
+                    //        if (mapMatrix[i][j] == "empty") {
+                    //            context.drawImage(grassImage, x, y, size, size);
+                    //        }
+                    //        if (mapMatrix[i][j] == "home") {
+                    //            context.drawImage(houseImage, x, y, size, size);
+                    //        }
+                    //        if (mapMatrix[i][j] == "mouse") {
+                    //            context.drawImage(mouseImage, x, y, size, size);
+                    //        }
+                    //        if (mapMatrix[i][j] == "rockWall") {
+                    //            context.drawImage(rockImage, x, y, size, size);
+                    //        }
+                    //        if (mapMatrix[i][j] == "sun") {
+                    //            context.drawImage(sunImage, x, y, size, size);
+                    //        }
+                    //        if (mapMatrix[i][j] == "pointSquare") {
+                    //            context.drawImage(pointImage, x, y, size, size);
+                    //        }
+                    //    };
+                    //};
+                    
+                    //DrawPlayer
+                    context.drawImage(_drawImage, player.positionX, player.positionY, player.size, player.size);
+
+                    //TODO DrawSidebar
+                }
+
+                function keyupHandler(event)
+                {
+                    player.Update();
+                    //map.Update();
+                    render();
+                };
+                function keydownHandler(event)
+                {
+                    //If(arrow directions) move in that direction
+                    if (event.keyCode == 65) { /*move left*/ player.direction = player.left; }
+                    if (event.keyCode == 87) { /*move up*/ player.direction = player.up; }
+                    if (event.keyCode == 83) { /*move down*/ player.direction = player.down; }
+                    if (event.keyCode == 68) { /*move right*/ player.direction = player.right; }
+                    if (event.keyCode != 65 && event.keyCode != 68 && event.keyCode != 83 && event.keyCode != 87) { player.direction = player.idle; }
+                };
+
+                //function Tile(_type, _image, _size) {
+                //    this.type = _type;
+                //    this.image = _image;
+                //    this.size = _size;
+                //};
+
+                //function Hawk(_x, _y) {
+                //    this.image = "Images/Hawk.jpg";
+                //    this.positionX = _x;
+                //    this.positionY = _y;
+                //};
+
+                var mapMatrix = // width 5 height 15
+                    [
+
+                        ["home", "empty", "empty", "empty", "sun"],
+                        ["rockWall", "rockWall", "empty", "empty", "empty"],
+                        ["sun", "empty", "empty", "rockWall", "empty"],
+                        ["empty", "empty", "empty", "empty", "empty"],
+                        ["empty", "empty", "sun", "rockWall", "rockWall"],
+                        ["empty", "empty", "empty", "rockWall", "rockWall"],
+                        ["empty", "empty", "empty", "empty", "sun"],
+                        ["empty", "empty", "rockWall", "empty", "empty"],
+                        ["empty", "sun", "empty", "empty", "empty"],
+                        ["rockWall", "rockWall", "empty", "empty", "empty"],
+                        ["rockWall", "rockWall", "empty", "empty", "empty"],
+                        ["sun", "empty", "empty", "rockWall", "sun"],
+                        ["empty", "empty", "empty", "empty", "empty"],
+                        ["empty", "empty", "empty", "rockWall", "rockWall"],
+                        ["empty", "sun", "empty", "empty", "mouse"]
+
+                    ]
+
+                //var map =
+                    //{
+                        //size: 50,
+                        //home: Tile(0, "Images/Home.jpg", size),
+                        //mouse: Tile(1, "Images/Mouse.jpg", size),
+                        //empty: Tile(2, "Images/Grass.jpg", size),
+                        //sun: Tile(3, "Images/Sunlight.jpg", size),
+                        //pointsTile: Tile(4, "Images/PointSquare.jpg", size),
+                        //rockWall: Tile(5, "Images/Rock.jpg", size),
+
+                        ////Hawk array of 2
+                        //hawk1: Hawk(3, 3),
+                        //hawk2: Hawk(3, 3),
+                        //hawks: [hawk1, hawk2],
+                        //score,
+
+                        //Update: function () {
+                            //TODO move hawks using RnG
+                            //Random number 0 - 3
+                            //Math.floor(Math.random() * 4);
+                            //TODO If (number = 0 & hawk.x > 0) Go left
+                            //TODO Etc…
+                            //TODO If(player.location = hawk.location) Game over
+                            //TODO Decrease score by 1
+                        //},
+                    //};
+                 //function GameOver()
+        //{
+        //    //TODO Game Over pop- up
+        //    //TODO Refresh button
+        //};
+
+        //function Sidebar()
+        //{
+        //    //TODO Title of game
+        //    //TODO displays map.Score
+        //    //TODO displays Player.Sunlight
+        //    //TODO displays player.hasMouse
+        //    //TODO Instructions
+        //};
+
             })   
         </script>
   </head >
-            <body>
-                <canvas id="myCanvas" width="800" height="400">
-                    <!-- Insert fallback content here --> </canvas>
+    <body>
+        <canvas id="myCanvas" width="800" height="400">
+             <!-- Insert fallback content here --> 
+        </canvas>
 
-                <button id="change"></button>
-            </body> 
+        <button id="change"></button>
+    </body> 
 </html >
