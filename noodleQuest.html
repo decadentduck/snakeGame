@@ -49,7 +49,9 @@
                                 case player.left:
                                     if (player.positionX > 0)
                                     {
+                                        player.x -= 1;
                                         if (mapMatrix[player.x][player.y] != "rockWall") { player.positionX -= player.size; }
+                                        else { player.x += 1; }
                                         
                                         //player.positionX -= player.size;
                                     }
