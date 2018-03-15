@@ -9,6 +9,8 @@
             {
                 var canvas = $("#myCanvas");
                 var context = canvas.get(0).getContext("2d");
+
+                var charLog = document.getElementById("characterSheet");
                
                 var sunImage = new Image();
                 sunImage.src = "Images/Sunlight.jpg";
@@ -30,6 +32,10 @@
                         warmth: 10,
                         x: 0,
                         y: 0,
+                        currentSquare: "home",
+                        score: 0,
+                        isdead: false,
+                        wonGame: false,
 
                         //directions
                         idle: 0,
@@ -41,60 +47,78 @@
                         image: "Images/Snake.png",
                         hasMouse: false,
                         Update: function () {
-                            //move player based on direction
-                            player.x = player.positionX / player.size;
-                            player.y = player.positionY / player.size;
+                            //if alive
+                            if (!player.isdead && !player.wonGame)
+                            {
+                                //move player based on direction
+                                player.x = player.positionX / player.size;
+                                player.y = player.positionY / player.size;
 
-                            switch (player.direction) {
-                                case player.left:
-                                    if (player.positionX > 0)
-                                    {
-                                        player.x -= 1;
-                                        if (mapMatrix[player.x][player.y] != "rockWall") { player.positionX -= player.size; }
-                                        else { player.x += 1; }
+                                switch (player.direction) {
+                                    case player.left:
+                                        if (player.positionX > 0) {
+                                            player.x -= 1;
+                                            if (mapMatrix[player.x][player.y] != "rockWall") { player.positionX -= player.size; }
+                                            else { player.x += 1; }
+                                        }
+                                        break;
+                                    case player.up:
+                                        if (player.positionY > 0) {
+                                            player.y -= 1;
+                                            if (mapMatrix[player.x][player.y] != "rockWall") { player.positionY -= player.size; }
+                                            else { player.y += 1; }
+                                        }
+                                        break;
+                                    case player.down:
+                                        if (player.positionY < (player.size * 4)) {
+                                            player.y += 1;
+                                            if (mapMatrix[player.x][player.y] != "rockWall") { player.positionY += player.size; }
+                                            else { player.y -= 1; }
+                                        }
+                                        break;
+                                    case player.right:
+                                        if (player.positionX < (player.size * 14)) {
+                                            player.x += 1;
+                                            if (mapMatrix[player.x][player.y] != "rockWall") { player.positionX += player.size; }
+                                            else { player.x -= 1; }
+                                        }
+                                        break;
+                                    default:
+                                        break;
+                                };
+
+                                //(check which squares player is in, lose one heat)
+                                player.currentSquare = mapMatrix[player.x][player.y];
+                                player.warmth -= 1;
+
+                                //If sunlight, warmth = 10
+                                if (player.currentSquare == "sun") { player.warmth = 10; }
+                                //If(warmth = 0) Game over
+                                if (player.warmth <= 0)
+                                {
+                                    player.isdead = true;
+                                    GameOver();
+                                }
+                                //TODO If hawk, display game over screen
+
+                                //If points, score += 5
+                                if (player.currentSquare == "pointSquare") {
+                                    player.score += 5;
+                                    //TODO change to revealed points square
+                                }
+                                //If mouse, hasMouse = true
+                                if (player.currentSquare == "mouse") {
+                                    if (!player.hasMouse) {
+                                        player.hasMouse = true;
+                                        player.score += 50;
                                     }
-                                    break;
-                                case player.up:
-                                    if (player.positionY > 0)
-                                    {
-                                        player.y -= 1;
-                                        if (mapMatrix[player.x][player.y] != "rockWall") { player.positionY -= player.size; }
-                                        else { player.y += 1; }
-                                    }
-                                    break;
-                                case player.down:
-                                    if (player.positionY < (player.size * 4))
-                                    {
-                                        player.y += 1;
-                                        if (mapMatrix[player.x][player.y] != "rockWall") { player.positionY += player.size; }
-                                        else { player.y -= 1; }
-                                    }
-                                    break;
-                                case player.right:
-                                    if (player.positionX < (player.size * 14))
-                                    {
-                                        player.x += 1;
-                                        if (mapMatrix[player.x][player.y] != "rockWall") { player.positionX += player.size; }
-                                        else { player.x -= 1; }
-                                    }
-                                    break;
-                                default:
-                                    break;
-                            };
-
-                            //TODO (check which squares player is in, lose one heat)
-
-                            //TODO If sunlight, warmth = 10
-
-                            //TODO If(warmth = 0) Game over
-
-                            //TODO If hawk, display game over screen
-
-                            //TODO If points, score += 5
-
-                            //TODO If mouse, hasMouse = true
-
-                            //TODO If home and hasMouse = true, display win screen
+                                }
+                                //If home and hasMouse = true, display win screen
+                                if (player.currentSquare == "home" && player.hasMouse) {
+                                    player.wonGame = true;
+                                    GameOver();
+                                }
+                            }
                         }
                     };
 
@@ -105,10 +129,11 @@
                 window.addEventListener("keydown", keydownHandler, false);
                 
                 
-                function render() {
+                function render()
+                {
                     //clear the screen
                     context.clearRect(0, 0, 800, 800);
-
+                    charLog.innerHTML = "Warmth: " + player.warmth + " Score: " + player.score;
                     //DrawMap
                     var _image = new Image();
                     var x = 1;
@@ -129,31 +154,36 @@
                             x = size * i;
                             y = size * j;
 
-                            if (mapMatrix[i][j] == "empty") {
+                            if (mapMatrix[i][j] == "empty")
+                            {
                                 context.drawImage(grassImage, x, y, size, size);
                             }
-                            if (mapMatrix[i][j] == "home") {
+                            if (mapMatrix[i][j] == "home")
+                            {
                                 context.drawImage(houseImage, x, y, size, size);
                             }
-                            if (mapMatrix[i][j] == "mouse") {
+                            if (mapMatrix[i][j] == "mouse")
+                            {
                                 context.drawImage(mouseImage, x, y, size, size);
                             }
-                            if (mapMatrix[i][j] == "rockWall") {
+                            if (mapMatrix[i][j] == "rockWall")
+                            {
                                 context.drawImage(rockImage, x, y, size, size);
                             }
-                            if (mapMatrix[i][j] == "sun") {
+                            if (mapMatrix[i][j] == "sun")
+                            {
                                 context.drawImage(sunImage, x, y, size, size);
                             }
-                            if (mapMatrix[i][j] == "pointSquare") {
+                            if (mapMatrix[i][j] == "pointSquare")
+                            {
                                 context.drawImage(pointImage, x, y, size, size);
                             }
                         };
                     };
-                    
                     //DrawPlayer
                     context.drawImage(_drawImage, player.positionX, player.positionY, player.size, player.size);
+                    //TODO draw hawks
 
-                    //TODO DrawSidebar
                 }
 
                 function keyupHandler(event)
@@ -172,12 +202,6 @@
                     if (event.keyCode != 65 && event.keyCode != 68 && event.keyCode != 83 && event.keyCode != 87) { player.direction = player.idle; }
                 };
                 
-                //function Hawk(_x, _y) {
-                //    this.image = "Images/Hawk.jpg";
-                //    this.positionX = _x;
-                //    this.positionY = _y;
-                //};
-
                 var mapMatrix = // width 5 height 15
                     [
 
@@ -196,40 +220,22 @@
                         ["empty", "empty", "empty", "empty", "empty"],
                         ["empty", "empty", "empty", "rockWall", "rockWall"],
                         ["empty", "sun", "empty", "empty", "mouse"]
-
+                        
                     ]
 
-                var map =
+                var hawk1 =
                     {
-                        //size: 50,
-                        //home: Tile(0, "Images/Home.jpg", size),
-                        //mouse: Tile(1, "Images/Mouse.jpg", size),
-                        //empty: Tile(2, "Images/Grass.jpg", size),
-                        //sun: Tile(3, "Images/Sunlight.jpg", size),
-                        //pointsTile: Tile(4, "Images/PointSquare.jpg", size),
-                        //rockWall: Tile(5, "Images/Rock.jpg", size),
+                        positionX: 6,
+                        positionY: 3,
+                        image: "Images/Hawk.jpg",
+                    }
 
-                        ////Hawk array of 2
-                        //hawk1: Hawk(3, 3),
-                        //hawk2: Hawk(3, 3),
-                        //hawks: [hawk1, hawk2],
-                        //score,
-
-                        //Update: function () {
-                            //TODO move hawks using RnG
-                            //Random number 0 - 3
-                            //Math.floor(Math.random() * 4);
-                            //TODO If (number = 0 & hawk.x > 0) Go left
-                            //TODO Etc…
-                            //TODO If(player.location = hawk.location) Game over
-                            //TODO Decrease score by 1
-                        //},
-                    };
-                 //function GameOver()
-        //{
-        //    //TODO Game Over pop- up
-        //    //TODO Refresh button
-        //};
+                function GameOver()
+                {
+                    if (player.isdead) { alert("Game Over"); }
+                    if (player.wonGame) { alert("You win!"); }
+                    location.reload();
+                };
 
         //function Sidebar()
         //{
@@ -238,16 +244,19 @@
         //    //TODO displays Player.Sunlight
         //    //TODO displays player.hasMouse
         //    //TODO Instructions
-        //};
+                //};
+                
 
             })   
         </script>
   </head >
-    <body>
-        <canvas id="myCanvas" width="800" height="400">
-             <!-- Insert fallback content here --> 
-        </canvas>
+<body>
 
-        <button id="change"></button>
-    </body> 
+    <canvas id="myCanvas" width="800" height="300">
+        <!-- Insert fallback content here -->
+    </canvas>
+    <p id="characterSheet" style="position: absolute; left: 800px; top: 0px;">Character Stats</p>
+    <p style="position: absolute; left: 800px; top: 20px;"> Put game instructions here</p>
+    <!--<button id="change"></button>-->
+</body> 
 </html >
