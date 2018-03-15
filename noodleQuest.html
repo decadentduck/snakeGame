@@ -100,11 +100,22 @@
                                     GameOver();
                                 }
                                 //TODO If hawk, display game over screen
-
+                                if (player.x == hawk1.positionX && player.y == hawk1.positionY)
+                                {
+                                    isdead = true;
+                                    GameOver();
+                                }
+                                if (player.x == hawk2.positionX && player.y == hawk2.positionY)
+                                {
+                                    isdead = true;
+                                    GameOver();
+                                }
                                 //If points, score += 5
-                                if (player.currentSquare == "pointSquare") {
+                                if (player.currentSquare == "pointSquare")
+                                {
                                     player.score += 5;
-                                    //TODO change to revealed points square
+                                    //change to revealed points square
+                                    mapMatrix[x][y] = "revealedPointSquare";
                                 }
                                 //If mouse, hasMouse = true
                                 if (player.currentSquare == "mouse") {
@@ -181,15 +192,23 @@
                         };
                     };
                     //DrawPlayer
+                    _drawImage.src = player.image;
                     context.drawImage(_drawImage, player.positionX, player.positionY, player.size, player.size);
-                    //TODO draw hawks
+                    //draw hawks
+                    _drawImage.src = hawk1.image;
+                    context.drawImage(_drawImage, (hawk1.positionX * hawk1.size),
+                        (hawk1.positionY * hawk1.size), hawk1.size, hawk1.size);
+                    _drawImage.src = hawk2.image;
+                    context.drawImage(_drawImage, (hawk2.positionX * hawk2.size),
+                        (hawk2.positionY * hawk2.size), hawk2.size, hawk2.size);
 
                 }
 
                 function keyupHandler(event)
                 {
                     player.Update();
-                    //map.Update();
+                    hawk1.Update();
+                    hawk2.Update();
                     render();
                 };
                 function keydownHandler(event)
@@ -225,9 +244,60 @@
 
                 var hawk1 =
                     {
-                        positionX: 6,
+                        positionX: 5,
+                        positionY: 1,
+                        image: "Images/Hawk.jpg",
+                        size: 50,
+                        Update: function ()
+                        {
+                            var i = Math.floor((Math.random) * 4);
+                            switch (i)
+                            {
+                                case 1:
+                                    hawk1.positionX += 1;
+                                    break;
+                                case 2:
+                                    hawk1.positionX -= 1;
+                                    break;
+                                case 3:
+                                    hawk1.positionY += 1;
+                                    break;
+                                case 4:
+                                    hawk1.positionY -= 1;
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+                var hawk2 =
+                    {
+                        positionX: 9,
                         positionY: 3,
                         image: "Images/Hawk.jpg",
+                        size: 50,
+                        Update: function ()
+                        {
+                            var i = Math.floor((Math.random) * 4);
+                            i = 1;
+                            switch (i)
+                            {
+                                case 1:
+                                    hawk2.positionX += 1;
+                                    break;
+                                case 2:
+                                    hawk2.positionX -= 1;
+                                    break;
+                                case 3:
+                                    hawk2.positionY += 1;
+                                    break;
+                                case 4:
+                                    hawk2.positionY -= 1;
+                                    break;
+                                default:
+                                    break;
+                            }
+                        } 
                     }
 
                 function GameOver()
@@ -236,17 +306,7 @@
                     if (player.wonGame) { alert("You win!"); }
                     location.reload();
                 };
-
-        //function Sidebar()
-        //{
-        //    //TODO Title of game
-        //    //TODO displays map.Score
-        //    //TODO displays Player.Sunlight
-        //    //TODO displays player.hasMouse
-        //    //TODO Instructions
-                //};
                 
-
             })   
         </script>
   </head >
