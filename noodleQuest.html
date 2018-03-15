@@ -52,20 +52,22 @@
                                         player.x -= 1;
                                         if (mapMatrix[player.x][player.y] != "rockWall") { player.positionX -= player.size; }
                                         else { player.x += 1; }
-                                        
-                                        //player.positionX -= player.size;
                                     }
                                     break;
                                 case player.up:
                                     if (player.positionY > 0)
                                     {
-                                        player.positionY -= player.size;
+                                        player.y -= 1;
+                                        if (mapMatrix[player.x][player.y] != "rockWall") { player.positionY -= player.size; }
+                                        else { player.y += 1; }
                                     }
                                     break;
                                 case player.down:
                                     if (player.positionY < (player.size * 4))
                                     {
-                                        player.positionY += player.size;
+                                        player.y += 1;
+                                        if (mapMatrix[player.x][player.y] != "rockWall") { player.positionY += player.size; }
+                                        else { player.y -= 1; }
                                     }
                                     break;
                                 case player.right:
