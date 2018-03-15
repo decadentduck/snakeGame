@@ -24,6 +24,8 @@
                 rockImage.src = "Images/Rock.jpg";
                 var pointImage = new Image();
                 pointImage.src = "Images/PointSquare.jpg";
+                var starImage = new Image();
+                starImage.src = "Images/Star.jpg";
                 var player =
                     {
                         positionX: 0,
@@ -48,8 +50,7 @@
                         hasMouse: false,
                         Update: function () {
                             //if alive
-                            if (!player.isdead && !player.wonGame)
-                            {
+                            if (!player.isdead && !player.wonGame) {
                                 //move player based on direction
                                 player.x = player.positionX / player.size;
                                 player.y = player.positionY / player.size;
@@ -94,45 +95,100 @@
                                 //If sunlight, warmth = 10
                                 if (player.currentSquare == "sun") { player.warmth = 10; }
                                 //If(warmth = 0) Game over
-                                if (player.warmth <= 0)
-                                {
+                                if (player.warmth <= 0) {
                                     player.isdead = true;
-                                    GameOver();
                                 }
-                                //TODO If hawk, display game over screen
-                                if (player.x == hawk1.positionX && player.y == hawk1.positionY)
-                                {
-                                    isdead = true;
-                                    GameOver();
+                                //If hawk, display game over screen
+                                if (player.x == hawk1.positionX && player.y == hawk1.positionY) {
+                                    player.isdead = true;
                                 }
-                                if (player.x == hawk2.positionX && player.y == hawk2.positionY)
-                                {
-                                    isdead = true;
-                                    GameOver();
+                                if (player.x == hawk2.positionX && player.y == hawk2.positionY) {
+                                    player.isdead = true;
                                 }
                                 //If points, score += 5
                                 if (player.currentSquare == "pointSquare")
                                 {
-                                    player.score += 5;
+                                    player.score += 25;
                                     //change to revealed points square
-                                    mapMatrix[x][y] = "revealedPointSquare";
+                                    mapMatrix[player.x][player.y] = "star";
                                 }
                                 //If mouse, hasMouse = true
-                                if (player.currentSquare == "mouse") {
+                                if (player.currentSquare == "mouse")
+                                {
                                     if (!player.hasMouse) {
                                         player.hasMouse = true;
-                                        player.score += 50;
+                                        player.score += 75;
+                                        mapMatrix[player.x][player.y] = "empty";
                                     }
                                 }
                                 //If home and hasMouse = true, display win screen
-                                if (player.currentSquare == "home" && player.hasMouse) {
+                                if (player.currentSquare == "home" && player.hasMouse)
+                                {
+                                    player.score += 100;
                                     player.wonGame = true;
-                                    GameOver();
                                 }
                             }
+                            else { GameOver(); }
                         }
                     };
 
+                var hawk1 =
+                    {
+                        positionX: 5,
+                        positionY: 1,
+                        image: "Images/Hawk.png",
+                        size: 50,
+                        Update: function () {
+                            var i = Math.floor(Math.random() * 4);
+                            i += 1;
+                            switch (i) {
+                                case 1:
+                                    if (hawk1.positionX < 14) { hawk1.positionX += 1; }
+                                    break;
+                                case 2:
+                                    if (hawk1.positionX > 0) { hawk1.positionX -= 1; }
+                                    break;
+                                case 3:
+                                    if (hawk1.positionY < 4) { hawk1.positionY += 1; }
+                                    break;
+                                case 4:
+                                    if (hawk1.positionY > 0) { hawk1.positionY -= 1; }
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+                var hawk2 =
+                    {
+                        positionX: 9,
+                        positionY: 3,
+                        image: "Images/Hawk.png",
+                        size: 50,
+                        Update: function () {
+                            var i = Math.floor(Math.random() * 4);
+                            i += 1;
+                            switch (i) {
+                                case 1:
+                                    if (hawk2.positionX < 14) { hawk2.positionX += 1; }
+                                    break;
+                                case 2:
+                                    if (hawk2.positionX > 0) { hawk2.positionX -= 1; }
+                                    break;
+                                case 3:
+                                    if (hawk2.positionY < 4) { hawk2.positionY += 1; }
+                                    break;
+                                case 4:
+                                    if (hawk2.positionY > 0) { hawk2.positionY -= 1; }
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+
+                var birdImage = new Image();
+                birdImage.src = hawk1.image;
                 var _drawImage = new Image();
                 _drawImage.src = player.image;
                 _drawImage.addEventListener("load", render, false);
@@ -185,31 +241,34 @@
                             {
                                 context.drawImage(sunImage, x, y, size, size);
                             }
-                            if (mapMatrix[i][j] == "pointSquare")
-                            {
+                            if (mapMatrix[i][j] == "pointSquare") {
                                 context.drawImage(pointImage, x, y, size, size);
+                            }
+                            if (mapMatrix[i][j] == "star")
+                            {
+                                context.drawImage(starImage, x, y, size, size);
                             }
                         };
                     };
                     //DrawPlayer
-                    _drawImage.src = player.image;
                     context.drawImage(_drawImage, player.positionX, player.positionY, player.size, player.size);
                     //draw hawks
-                    _drawImage.src = hawk1.image;
-                    context.drawImage(_drawImage, (hawk1.positionX * hawk1.size),
+                    context.drawImage(birdImage, (hawk1.positionX * hawk1.size),
                         (hawk1.positionY * hawk1.size), hawk1.size, hawk1.size);
-                    _drawImage.src = hawk2.image;
-                    context.drawImage(_drawImage, (hawk2.positionX * hawk2.size),
+                    context.drawImage(birdImage, (hawk2.positionX * hawk2.size),
                         (hawk2.positionY * hawk2.size), hawk2.size, hawk2.size);
 
                 }
 
                 function keyupHandler(event)
                 {
-                    player.Update();
-                    hawk1.Update();
-                    hawk2.Update();
-                    render();
+                    if (event.keyCode == 65 || event.keyCode == 68 || event.keyCode == 83 || event.keyCode == 87)
+                    {
+                        hawk1.Update();
+                        hawk2.Update();
+                        player.Update();
+                        render();
+                    }
                 };
                 function keydownHandler(event)
                 {
@@ -242,64 +301,6 @@
                         
                     ]
 
-                var hawk1 =
-                    {
-                        positionX: 5,
-                        positionY: 1,
-                        image: "Images/Hawk.jpg",
-                        size: 50,
-                        Update: function ()
-                        {
-                            var i = Math.floor((Math.random) * 4);
-                            switch (i)
-                            {
-                                case 1:
-                                    hawk1.positionX += 1;
-                                    break;
-                                case 2:
-                                    hawk1.positionX -= 1;
-                                    break;
-                                case 3:
-                                    hawk1.positionY += 1;
-                                    break;
-                                case 4:
-                                    hawk1.positionY -= 1;
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    }
-                var hawk2 =
-                    {
-                        positionX: 9,
-                        positionY: 3,
-                        image: "Images/Hawk.jpg",
-                        size: 50,
-                        Update: function ()
-                        {
-                            var i = Math.floor((Math.random) * 4);
-                            i = 1;
-                            switch (i)
-                            {
-                                case 1:
-                                    hawk2.positionX += 1;
-                                    break;
-                                case 2:
-                                    hawk2.positionX -= 1;
-                                    break;
-                                case 3:
-                                    hawk2.positionY += 1;
-                                    break;
-                                case 4:
-                                    hawk2.positionY -= 1;
-                                    break;
-                                default:
-                                    break;
-                            }
-                        } 
-                    }
-
                 function GameOver()
                 {
                     if (player.isdead) { alert("Game Over"); }
@@ -317,7 +318,7 @@
     </canvas>
     
     <p style="position: absolute; left: 800px; top: 50px;"> Fluffy the noodle sets out on his quest for dinner. 
-                                                            Use the arrow keys to move the snake to the other side of the plain where the mouse is hiding, and then return home. 
+                                                            Use the WASD keys to move the snake to the other side of the plain where the mouse is hiding, and then return home. 
                                                             Take your time with each move, don’t get viper-active.</p>
 
     <p style="position: absolute; left: 800px; top: 100px;">Watch out for the two hawks who are also looking for lunch. 
